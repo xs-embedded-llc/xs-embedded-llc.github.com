@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><strong>l2dbus.Match</strong></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Match</code></h1>
+
+<p>L2DBUS Match</p>
+<p> This section defines the data structures associated with the
+ representation of a match rule.</p>
+
+
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#MatchRule">MatchRule</a></td>
+	<td class="summary">The table that describes keys/fields for matching a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FilterArgs">FilterArgs</a></td>
+	<td class="summary">The table that describes matches on the <em>N</em>'th argument of the body
+ of a message.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Tables"></a>Tables</h2>
+    <dl class="function">
+    <dt>
+    <a name = "MatchRule"></a>
+    <strong>MatchRule</strong>
+    </dt>
+    <dd>
+    The table that describes keys/fields for matching a message.  Excluding
+ a field indicates a wildcard match while including a field narrows
+ the scope of a match (e.g. makes it more inclusive).
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">msgType</span>
+       (number) The type of the D-Bus message to match. Possible options
+  include:
+  <ul>
+  <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a></li>
+  </ul></li>
+      <li><span class="parameter">member</span>
+       (string) Matches messages with a particular signal or member name</li>
+      <li><span class="parameter">objInterface</span>
+       (string) Matches messages sent over or to a particular
+ object interface</li>
+      <li><span class="parameter">sender</span>
+       (string) Matches messages sent by a particular sender.</li>
+      <li><span class="parameter">path</span>
+       (string) Matches messages which are sent from or to the given
+ object. This can be treated as an object path or namespace depending on
+ how treatPathAsNamespace is configured.</li>
+      <li><span class="parameter">treatPathAsNamespace</span>
+       (bool) An optional value that determines how
+ to interpret the path field. If <strong>true</strong> then the path is treated
+ as a Java-like namespace. If <strong>false</strong> (the default) then treat <em>path</em> as
+ an object path.</li>
+      <li><span class="parameter">arg0Namespace</span>
+       (string) Matches messages whose first argument is a string
+ and is a bus name or interface name within the specified
+ namespace. This is primarily intended for watching name owner changes
+ for a group of related bus names, rather than for signal name or all
+ name changes.</li>
+      <li><span class="parameter">eavesdrop</span>
+       (bool) Since D-Bus 1.5.6, match rules do not match
+ messages which have a DESTINATION field unless the match rule
+ specifically requests this by specifying eavesdrop as <strong>true</strong> in the match
+ rule. Setting eavesdrop as <strong>false</strong> restores the default behavior.
+ Messages are delivered to their DESTINATION regardless of match rules,
+ so this match does not affect normal delivery of unicast messages. If
+ the message bus has a security policy which forbids eavesdropping, this
+ match may still be used without error, but will not have any practical
+ effect. In older versions of D-Bus, this match was not allowed in match
+ rules, and all match rules behaved as if eavesdrop equals <strong>true</strong> had
+ been used.</li>
+      <li><span class="parameter">filterArgs</span>
+       (array) A Lua array of arg<em>N</em> <a href="../namespaces/l2dbus.Match.html#FilterArgs">filter arguments</a>.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FilterArgs"></a>
+    <strong>FilterArgs</strong>
+    </dt>
+    <dd>
+    The table that describes matches on the <em>N</em>'th argument of the body
+ of a message.  Only arguments of D-Bus type <strong>string</strong> or <strong>object path</strong>
+ can be matched depending on how the argument is interpreted. At most
+ 64 filter arguments can be specified.
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">type</span>
+       (string) Possible values are <em>string</em> or <em>path</em> depending
+ on how the match should be interpreted. If not specified then <em>string</em>
+ is the default.</li>
+      <li><span class="parameter">index</span>
+       (number) The argument index [0, 63].</li>
+      <li><span class="parameter">value</span>
+       (string) The D-Bus <em>string</em> or <em>object path</em>.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

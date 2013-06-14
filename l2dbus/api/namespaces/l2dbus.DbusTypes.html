@@ -1,0 +1,1990 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_Invalid">Class Invalid</a></li>
+<li><a href="#Invalid">Invalid</a></li>
+<li><a href="#Class_Byte">Class Byte</a></li>
+<li><a href="#Byte">Byte</a></li>
+<li><a href="#Class_Boolean">Class Boolean</a></li>
+<li><a href="#Boolean">Boolean</a></li>
+<li><a href="#Class_Int__">Class Int16</a></li>
+<li><a href="#Int__">Int16</a></li>
+<li><a href="#Class_Uint__">Class Uint16</a></li>
+<li><a href="#Uint__">Uint16</a></li>
+<li><a href="#Class_Int__">Class Int32</a></li>
+<li><a href="#Int__">Int32</a></li>
+<li><a href="#Class_Uint__">Class Uint32</a></li>
+<li><a href="#Uint__">Uint32</a></li>
+<li><a href="#Class_Int__">Class Int64</a></li>
+<li><a href="#Int__">Int64</a></li>
+<li><a href="#Class_Uint__">Class Uint64</a></li>
+<li><a href="#Uint__">Uint64</a></li>
+<li><a href="#Class_Double">Class Double</a></li>
+<li><a href="#Double">Double</a></li>
+<li><a href="#Class_String">Class String</a></li>
+<li><a href="#String">String</a></li>
+<li><a href="#Class_ObjectPath">Class ObjectPath</a></li>
+<li><a href="#ObjectPath">ObjectPath</a></li>
+<li><a href="#Class_Signature">Class Signature</a></li>
+<li><a href="#Signature">Signature</a></li>
+<li><a href="#Class_Array">Class Array</a></li>
+<li><a href="#Array">Array</a></li>
+<li><a href="#Class_Dictionary">Class Dictionary</a></li>
+<li><a href="#Dictionary">Dictionary</a></li>
+<li><a href="#Class_Structure">Class Structure</a></li>
+<li><a href="#Structure">Structure</a></li>
+<li><a href="#Class_Variant">Class Variant</a></li>
+<li><a href="#Variant">Variant</a></li>
+<li><a href="#Class_UnixFd">Class UnixFd</a></li>
+<li><a href="#UnixFd">UnixFd</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><strong>l2dbus.DbusTypes</strong></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.DbusTypes</code></h1>
+
+<p>The L2DBUS DbusTypes module.</p>
+<p> This module provides wrapper classes for the D-Bus types. The D-Bus type
+ wrappers provide a <em>hint</em> to the marshalling code that converts between
+ native Lua types and D-Bus types. Without any hint or a D-Bus introspective
+ signature a heuristic approach is used to convert between the two type systems.
+ Most of the time these conversions will be correct but the Lua/D-Bus wrapper
+ types and message signatures help avoid potential conversion ambiguity.</p>
+
+
+<h2><a href="#Class_Invalid">Class Invalid</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Invalid.new">l2dbus.DbusTypes.Invalid.new&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Invalid">Invalid</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Byte">Class Byte</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Byte.new">l2dbus.DbusTypes.Byte.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Byte">Byte</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Boolean">Class Boolean</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Boolean.new">l2dbus.DbusTypes.Boolean.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Boolean">Boolean</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Int__">Class Int16</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Int16.new">l2dbus.DbusTypes.Int16.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Int__">Int16</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Uint__">Class Uint16</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Uint16.new">l2dbus.DbusTypes.Uint16.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Uint__">Uint16</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Int__">Class Int32</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Int32.new">l2dbus.DbusTypes.Int32.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Int__">Int32</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Uint__">Class Uint32</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Uint32.new">l2dbus.DbusTypes.Uint32.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Uint__">Uint32</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Int__">Class Int64</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Int64.new">l2dbus.DbusTypes.Int64.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Int__">Int64</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Uint__">Class Uint64</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Uint64.new">l2dbus.DbusTypes.Uint64.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Uint__">Uint64</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Double">Class Double</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Double.new">l2dbus.DbusTypes.Double.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Double">Double</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_String">Class String</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.String.new">l2dbus.DbusTypes.String.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#String">String</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_ObjectPath">Class ObjectPath</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.ObjectPath.new">l2dbus.DbusTypes.ObjectPath.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#ObjectPath">ObjectPath</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Signature">Class Signature</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Signature.new">l2dbus.DbusTypes.Signature.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Signature">Signature</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Array">Class Array</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Array.new">l2dbus.DbusTypes.Array.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Array">Array</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Dictionary">Class Dictionary</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Dictionary.new">l2dbus.DbusTypes.Dictionary.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Dictionary">Dictionary</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Structure">Class Structure</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Structure.new">l2dbus.DbusTypes.Structure.new&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Structure">Structure</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_Variant">Class Variant</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.Variant.new">l2dbus.DbusTypes.Variant.new&nbsp;(value, signature)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Variant">Variant</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Class_UnixFd">Class UnixFd</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#l2dbus.DbusTypes.UnixFd.new">l2dbus.DbusTypes.UnixFd.new&nbsp;(fd)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#UnixFd">UnixFd</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#value">value&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dbusTypeId">dbusTypeId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Class_Invalid"></a>Class Invalid</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Invalid</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Invalid.new"></a>
+    <strong>l2dbus.DbusTypes.Invalid.new&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Invalid</em> wrapper object.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Invalid</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Invalid"></a>Invalid</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Invalid</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">nil</span></span>
+        Returns <strong>nil</strong> for the <em>Invalid</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Invalid</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Byte"></a>Class Byte</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Byte</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Byte.new"></a>
+    <strong>l2dbus.DbusTypes.Byte.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Byte</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Byte</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Byte</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Byte"></a>Byte</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Byte</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Byte</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Byte</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Boolean"></a>Class Boolean</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Boolean</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Boolean.new"></a>
+    <strong>l2dbus.DbusTypes.Boolean.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Boolean</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">bool</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Boolean</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Boolean</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Boolean"></a>Boolean</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Boolean</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns the value associated with the <em>Boolean</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Boolean</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Int__"></a>Class Int16</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Int16</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Int16.new"></a>
+    <strong>l2dbus.DbusTypes.Int16.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Int16</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Int16</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Int16</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Int__"></a>Int16</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Int16</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Int16</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Int16</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Uint__"></a>Class Uint16</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Uint16</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Uint16.new"></a>
+    <strong>l2dbus.DbusTypes.Uint16.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Uint16</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Uint16</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Uint16</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Uint__"></a>Uint16</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Uint16</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Uint16</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Uint16</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Int__"></a>Class Int32</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Int32</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Int32.new"></a>
+    <strong>l2dbus.DbusTypes.Int32.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Int32</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Int32</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Int32</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Int__"></a>Int32</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Int32</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Int32</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Int32</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Uint__"></a>Class Uint32</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Uint32</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Uint32.new"></a>
+    <strong>l2dbus.DbusTypes.Uint32.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Uint32</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Uint32</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Uint32</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Uint__"></a>Uint32</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Uint32</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Uint32</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Uint32</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Int__"></a>Class Int64</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Int64</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Int64.new"></a>
+    <strong>l2dbus.DbusTypes.Int64.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Int64</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span> or <span class="type">userdata</span></span>
+       The Lua value associated and wrapped by
+ the D-Bus <em>Int64</em> type. Besides the basic Lua <em>number</em> type the constructor
+ also accepts the <a href="../namespaces/l2dbus.Int64.html#">Int64</a>/<a href="../namespaces/l2dbus.Uint64.html#">Uint64</a> extended Lua
+ types provided by this module.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Int64</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Int__"></a>Int64</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Int64</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Int64</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Int64</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Uint__"></a>Class Uint64</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Uint64</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Uint64.new"></a>
+    <strong>l2dbus.DbusTypes.Uint64.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Uint64</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span> or <span class="type">userdata</span></span>
+       The Lua value associated and wrapped by
+ the D-Bus <em>Uint64</em> type. Besides the basic Lua <em>number</em> type the constructor
+ also accepts the <a href="../namespaces/l2dbus.Int64.html#">Int64</a>/<a href="../namespaces/l2dbus.Uint64.html#">Uint64</a> extended Lua
+ types provided by this module.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Uint64</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Uint__"></a>Uint64</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Uint64</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Uint64</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Uint64</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Double"></a>Class Double</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Double</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Double.new"></a>
+    <strong>l2dbus.DbusTypes.Double.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Double</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Double</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>Double</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Double"></a>Double</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Double</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>Double</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Double</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_String"></a>Class String</h2>
+        The L2DBUS wrapper class for the D-Bus <em>String</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.String.new"></a>
+    <strong>l2dbus.DbusTypes.String.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>String</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>String</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>String</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="String"></a>String</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>String</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        Returns the value associated with the <em>String</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>String</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_ObjectPath"></a>Class ObjectPath</h2>
+        The L2DBUS wrapper class for the D-Bus <em>ObjectPath</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.ObjectPath.new"></a>
+    <strong>l2dbus.DbusTypes.ObjectPath.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>ObjectPath</em> wrapper object. This function does <strong>not</strong>
+ validate the supplied D-Bus object path and assumes it meets the D-Bus
+ specification requirements for such a path.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>ObjectPath</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>ObjectPath</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="ObjectPath"></a>ObjectPath</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>ObjectPath</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        Returns the value associated with the <em>ObjectPath</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>ObjectPath</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Signature"></a>Class Signature</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Signature</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Signature.new"></a>
+    <strong>l2dbus.DbusTypes.Signature.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Signature</em> wrapper object. This function does <strong>not</strong>
+ validate the supplied D-Bus type signature and assumes it meets the D-Bus
+ specification requirements for such a signature.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The Lua value associated and wrapped by the D-Bus
+ <em>Signature</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>Signature</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Signature"></a>Signature</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Signature</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        Returns the value associated with the <em>Signature</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Signature</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Array"></a>Class Array</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Array</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Array.new"></a>
+    <strong>l2dbus.DbusTypes.Array.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Array</em> wrapper object. This constructor only minimally
+ validates the provided Lua table to verify that it meets the basic
+ restrictions of a D-Bus array. At a minimum, the elements of the table must
+ be consecutively indexed and be of the same (homogeneous) type.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The Lua table associated and wrapped by the D-Bus
+ <em>Array</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>Array</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Array"></a>Array</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Array</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Returns the value associated with the <em>Array</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Array</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Dictionary"></a>Class Dictionary</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Dictionary</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Dictionary.new"></a>
+    <strong>l2dbus.DbusTypes.Dictionary.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Dictionary</em> wrapper object. In D-Bus terms a dictionary
+ is an array of DICT_ENTRY structures whereby the key is a <em>basic</em> D-Bus type
+ and the associated value is any valid D-Bus type. The constructor only
+ minimally validates the provided Lua table to verify that it meets the basic
+ restrictions of a D-Bus DICT_ENTRY array.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The Lua table associated and wrapped by the D-Bus
+ <em>Dictionary</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>Dictionary</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Dictionary"></a>Dictionary</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Dictionary</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Returns the value associated with the <em>Dictionary</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Dictionary</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Structure"></a>Class Structure</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Structure</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Structure.new"></a>
+    <strong>l2dbus.DbusTypes.Structure.new&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Structure</em> wrapper object. In Lua terms this is an
+ array containing non-homogeneous types. This differs from a D-Bus array
+ where all the elements of the array must be the same time. The <em>fields</em> of
+ the structure are ordered by increasing index. The constructor does
+ minimal checking to verify the Lua table passed into it meets these minimal
+ requirements.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The Lua table associated and wrapped by the D-Bus
+ <em>Structure</em> type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>Structure</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Structure"></a>Structure</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Structure</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Returns the value associated with the <em>Structure</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Structure</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_Variant"></a>Class Variant</h2>
+        The L2DBUS wrapper class for the D-Bus <em>Variant</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.Variant.new"></a>
+    <strong>l2dbus.DbusTypes.Variant.new&nbsp;(value, signature)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>Variant</em> wrapper object. A variant can hold any D-Bus
+ type whether it is a basic or container type. This means it can be used
+ to hold any Lua type <strong>excluding</strong> functions, threads (coroutines), nil, and
+ external userdata (or lightuserdata) objects.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">any</span></span>
+       The Lua value (any type) associated and wrapped by the D-Bus
+ <em>Variant</em> type. This type <strong>excludes</strong> functions, threads, nil, and external
+ userdata or lightuserdata.</li>
+      <li><span class="parameter">signature</span>
+        <span class="types">optional <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The optional D-Bus signature describing the
+ variant type. <strong>Note:</strong> it's necessary to prefix the signature with the
+ D-Bus '<em>v</em>' (variant) type code in order to be parsed as a variant.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+         A Lua userdata wrapper around a D-Bus <em>Variant</em> typed
+ object.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Variant"></a>Variant</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>Variant</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Returns the value associated with the <em>Variant</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>Variant</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Class_UnixFd"></a>Class UnixFd</h2>
+        The L2DBUS wrapper class for the D-Bus <em>UnixFd</em> type.
+    <dl class="function">
+    <dt>
+    <a name = "l2dbus.DbusTypes.UnixFd.new"></a>
+    <strong>l2dbus.DbusTypes.UnixFd.new&nbsp;(fd)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus <em>UnixFd</em> wrapper object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">fd</span>
+        <span class="types"><span class="type">number</span></span>
+       A Unix file descriptor to wrap. The application must
+ verify that the version of D-Bus being used supports passing file descriptors
+ since not all versions of the library support it.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        A Lua userdata wrapper around a D-Bus <em>UnixFd</em> typed object.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="UnixFd"></a>UnixFd</h2>
+    <dl class="function">
+    <dt>
+    <a name = "value"></a>
+    <strong>value&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the value associated with the <em>UnixFd</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the value associated with the <em>UnixFd</em> type.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dbusTypeId"></a>
+    <strong>dbusTypeId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus type identifier associated with the <em>UnixFd</em> type.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the integral value for the associated D-Bus type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

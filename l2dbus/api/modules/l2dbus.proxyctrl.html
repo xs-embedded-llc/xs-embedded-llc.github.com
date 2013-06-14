@@ -1,0 +1,1084 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#ProxyController">ProxyController</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><strong>l2dbus.proxyctrl</strong></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>l2dbus.proxyctrl</code></h1>
+
+<p>Proxy Controller Module.</p>
+<p> This module provides an abstract controller/proxy client class library
+ for communicating with a remote D-Bus service. Based on either the D-Bus
+ XML introspection data for a service or an explicit description in Lua, the
+ class provides a mechanism to dynamically generate a true proxy interface
+ for the methods and properties exposed by the remote D-Bus service.
+ </br></br>
+ See the description of the <a href="../modules/l2dbus.proxyctrl.html#getProxy">getProxy</a> method for a better understanding
+ on how to use the proxied interfaces to call methods or get/set properties
+ of an interface.
+ </p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(conn, busName, objPath)</a></td>
+	<td class="summary">Constructs a new ProxyController instance.</td>
+	</tr>
+</table>
+<h2><a href="#ProxyController">ProxyController</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#bind">bind&nbsp;(ctrl)</a></td>
+	<td class="summary">Binds the controller to the remote service using D-Bus introspection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#bindNoIntrospect">bindNoIntrospect&nbsp;(ctrl, introspectionData)</a></td>
+	<td class="summary">Binds the controller to the remote service <strong>without</strong> D-Bus introspection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unbind">unbind&nbsp;(ctrl)</a></td>
+	<td class="summary">Unbinds the controller from the remote service.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getIntrospectionData">getIntrospectionData&nbsp;(ctrl)</a></td>
+	<td class="summary">Retrieves the introspection data from the ProxyController.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getProxy">getProxy&nbsp;(ctrl, interface)</a></td>
+	<td class="summary">Retrieves the actual proxy for the remote D-Bus service.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setTimeout">setTimeout&nbsp;(ctrl, timeout)</a></td>
+	<td class="summary">Sets the timeout to use for all proxy requests.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getTimeout">getTimeout&nbsp;(ctrl)</a></td>
+	<td class="summary">Gets the timeout used for all proxy requests.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBlockingMode">setBlockingMode&nbsp;(ctrl, mode)</a></td>
+	<td class="summary">Sets the blocking mode used by the ProxyController to make calls.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getBlockingMode">getBlockingMode&nbsp;(ctrl)</a></td>
+	<td class="summary">Gets the blocking mode used by the ProxyController to make calls.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setProxyNoReplyNeeded">setProxyNoReplyNeeded&nbsp;(ctrl, mode)</a></td>
+	<td class="summary">Sets whether proxy method calls expect/need a reply from the far-end.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getProxyNoReplyNeeded">getProxyNoReplyNeeded&nbsp;(ctrl)</a></td>
+	<td class="summary">Indicates whether proxy calls need/expect a reply from the far-end.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#connectSignal">connectSignal&nbsp;(ctrl, interface, sigName, handler)</a></td>
+	<td class="summary">Connects a handler to an interface's signal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#disconnectSignal">disconnectSignal&nbsp;(ctrl, hnd)</a></td>
+	<td class="summary">Disconnects the specified handler from the D-Bus signal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#disconnectAllSignals">disconnectAllSignals&nbsp;(ctrl)</a></td>
+	<td class="summary">Disconnects all the signal handlers from the ProxyController.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sendMessage">sendMessage&nbsp;(ctrl, msg)</a></td>
+	<td class="summary">Sends a D-Bus message depending on the blocking mode of the ProxyController.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sendMessageNoReply">sendMessageNoReply&nbsp;(ctrl, msg)</a></td>
+	<td class="summary">Sends a D-Bus message indicating it does not expect a reply.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#waitForReply">waitForReply&nbsp;(ctrl, pendingCall)</a></td>
+	<td class="summary">Waits for a reply from a pending call.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#parseXml">parseXml&nbsp;(ctrl, xmlStr)</a></td>
+	<td class="summary">Parses D-Bus introspection XML data a returns a Lua table equivalent.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(conn, busName, objPath)</strong>
+    </dt>
+    <dd>
+    Constructs a new ProxyController instance. </p>
+
+<p> The constructor creates a ProxyController instance. As its name implies
+ the object controls the behavior and configuration of a proxy. These
+ configurable items include things like the timeout used by the proxy,
+ blocking mode, and the actual dynamic generation of the proxy itself based
+ on metadata gleaned from the remote object (via D-Bus introspection or
+ provided directly). The ProxyController exposes the actual remote service
+ proxy including methods and properties via separate objects that eliminate
+ <em>namespace</em> collisions between the controller's methods and those of the
+ remote service.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Connection.html#">Connection</a> to attach
+ the controller to.</li>
+      <li><span class="parameter">busName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus bus name on which the remote service is
+ offered.</li>
+      <li><span class="parameter">objPath</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The remote service's object path.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        A proxy controller instance.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="ProxyController"></a>ProxyController</h2>
+    <dl class="function">
+    <dt>
+    <a name = "bind"></a>
+    <strong>bind&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Binds the controller to the remote service using D-Bus introspection. </p>
+
+<p> This method will attempt to introspect the remote service associated with
+ this ProxyController. This implies that the <a href="../namespaces/l2dbus.Connection.html#">Connection</a>
+ associated with the controller must be connected and the remote service
+ must support introspection. The method may throw a Lua error if an
+ exceptional (unexpected) error occurs.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">true</span> or <span class="type">nil</span></span>
+        Returns <strong>true</strong> if the binding operation succeeds
+ or <strong>nil</strong> on failure.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns an error name or <strong>nil</strong> if a name is
+ unavailable and the binding operation fails.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns an error message or <strong>nil</strong> if a message is
+ unavailable and the binding operation fails.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "bindNoIntrospect"></a>
+    <strong>bindNoIntrospect&nbsp;(ctrl, introspectionData)</strong>
+    </dt>
+    <dd>
+    Binds the controller to the remote service <strong>without</strong> D-Bus introspection. </p>
+
+<p> This method uses the provided introspection data (either formatted as
+ D-Bus introspection XML or a Lua introspection table) to <em>bind</em> with the
+ remote service. This method makes <strong>no</strong> attempt to contact the remote
+ service for this data by sending messages on the bus. If the data is
+ provided as D-Bus introspection XML then it will internally be parsed
+ and converted into a Lua introspection table. The structure of a Lua
+ introspection table takes the following form:</p>
+
+<pre><code>    {
+        ["interface_name_1"] = {
+
+            interface = "interface_name_1",
+
+            properties = {
+                prop_name_1 = {
+                    sig = "i",
+                    access = "r"
+                },
+                prop_name_2 = {
+                    sig = "s",
+                    access = "rw"
+                },
+                ...
+                prop_name_N = {
+                    sig = "u",
+                    access = "w"
+                },
+            },
+
+            signals = {
+                sig_name_1 = {
+                    {
+                        sig = "s",
+                        dir = "out"
+                    }
+                },
+                sig_name_2 = {
+                    {
+                        sig = "i",
+                        dir = "out"
+                    },
+                    {
+                        sig = "as",
+                        dir = "out"
+                    }
+                },
+                ...
+                sig_name_N = {
+                    {
+                        sig = "t",
+                        dir = "out"
+                    },
+                    {
+                        sig = "i",
+                        dir = "out"
+                    }
+                }
+            },
+
+            methods = {
+                method_name_1 = {
+                    {
+                        sig = "as",
+                        dir = "out"
+                    }
+                },
+
+                method_name_2 = {
+                    {
+                        sig = "s",
+                        dir = "in"
+                    },
+                    {
+                        sig = "i",
+                        dir = "out"
+                    }
+                },
+                ...
+                method_name_N = {
+                    {
+                        sig = "u",
+                        dir = "in"
+                    }
+                }
+            },
+        },
+        ...
+        ["interface_name_N"] = {
+            ...
+        }
+</code></pre>
+
+<p> Introspection data that is <strong>not</strong> formatted as D-Bus XML introspection
+ data must adhere to the structure of the Lua introspection table above. This
+ table is comprised of one or more interface tables. Each interface table
+ has a properties, signals, and methods table. It also has a (seemingly)
+ redundant entry for the interface name which helps speed up interface
+ lookups. The method, signal, and property tables themselves can have
+ multiple entries with individual methods and signals having zero or more
+ arguments. When fed an XML formatted D-Bus interface description a similar
+ table is generated and stored internally.</p>
+
+<p> <strong>WARNING:</strong> Validation is <strong>not</strong> done on a Lua introspectionData table
+ passed into this function. It is assumed to be structured correctly.
+ Minimal validation is done if this introspection data is passed in as XML.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">introspectionData</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The introspection data either
+ expressed as the D-Bus XML introspection string or a Lua introspection
+ table as above. </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">true</span></span>
+        Returns <strong>true</strong> if the binding operation succeeds. If the
+ introspection data cannot be parsed then a Lua error may be thrown.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unbind"></a>
+    <strong>unbind&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Unbinds the controller from the remote service. </p>
+
+<p> This method unbinds or disconnects the ProxyController from the
+ remote service by effectively erasing any previous introspection
+ data. The call the <a href="../modules/l2dbus.proxyctrl.html#bind">bind</a> or <a href="../modules/l2dbus.proxyctrl.html#bindNoIntrospect">bindNoIntrospect</a> must be executed again
+ in order to interact with the remote D-Bus service.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getIntrospectionData"></a>
+    <strong>getIntrospectionData&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Retrieves the introspection data from the ProxyController. </p>
+
+<p> This method returns the D-Bus introspection data as a Lua table
+ described in the documentation for <a href="../modules/l2dbus.proxyctrl.html#bindNoIntrospect">bindNoIntrospect</a>. This can be
+ useful to understand how D-Bus XML introspection data is converted to
+ a Lua table representation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getProxy"></a>
+    <strong>getProxy&nbsp;(ctrl, interface)</strong>
+    </dt>
+    <dd>
+    Retrieves the actual proxy for the remote D-Bus service. </p>
+
+<p> This method returns a proxy for the named interface. The actual
+ proxy has two sub-objects named <em>p</em> and <em>m</em>. These sub-objects split
+ the interface namespace into properties (<em>p</em>) and methods (<em>m</em>) avoiding
+ the possibility of name collisions. Before you can get the proxy the
+ ProxyController must be <a href="../modules/l2dbus.proxyctrl.html#bind">bound</a> to a remote service. An example
+ of how to access methods or properties on a remote service is shown below:</p>
+
+<pre><code>    -- Example of making a BLOCKING call on a proxy
+    local proxyCtrl, proxy, status, pending, reply, enabled
+    proxyCtrl = proxy.new(conn, "org.freedesktop.NetworkManager",
+                        /org/freedesktop/NetworkManager")
+    -- Bind to the remote service
+    proxyCtrl:bind()
+    -- Put the controller in blocking mode
+    proxyCtrl:setBlockingMode(true)
+    -- Get the actual proxy for the interface we're interested in
+    proxy = proxyCtrl:getProxy("org.freedesktop.NetworkManager")
+    status, names = proxy.m.GetDevices()
+    if status then
+        print("We got device names")
+    end
+    -- Use the "getter" sub-object to read the value of a property
+    status, enabled = proxy.p.get.WirelessEnabled()
+    if status then
+        -- Set the property but indicate we're not interested
+        -- in the response ('true' == no response needed)
+        proxy.p.set.WirelessEnabled(not enabled, true)
+    end
+
+
+    -- Example of making a NON-BLOCKING call on a proxy
+    local proxyCtrl, proxy, status, pending, reply, enabled
+    proxyCtrl = proxy.new(conn, "org.freedesktop.NetworkManager",
+                        "/org/freedesktop/NetworkManager")
+    proxyCtrl:bind()
+    -- The proxy calls to the remote service are non-blocking now
+    proxyCtrl:setBlockingMode(false)
+    -- Get the proxy for the interface we're interested in
+    proxy = proxyCtrl:getProxy("org.freedesktop.NetworkManager")
+    -- If everything goes smoothly (status == true) the 'pending' is
+    -- a PendingCall object.
+    status, pending = proxy.m.GetDevices()
+    if status then
+        -- Wait to get a reply. Will yield if called from a coroutine
+        -- other than the "main" one.
+        status, reply = proxyCtrl:waitForReply(pending)
+        if status then
+            print("We got device names")
+        end
+    end
+    -- Properties are retrieved in the same way as before
+    status, pending = proxy.p.get.WirelessEnabled()
+    if status then
+        -- Wait for the property "get" request to complete
+        status, enabled = proxyCtrl:waitForReply(pending)
+        if status then
+            print("We got the Wireless state")
+            -- Again, set the property but indicate (true) that no
+            -- reply is needed.
+            proxy.p.set.WirelessEnabled(enabled, true)
+        end
+    end
+</code></pre>
+
+<p> The method and property sub-objects expose the remote methods and properties
+ of a bound service interface. The <em>property</em> sub-object (p) is further
+ split into properties that are writable (e.g. can be <em>set</em>) and those that
+ can only be read (e.g. <em>get</em>). So the <em>p</em> sub-object of a proxy has two
+ sub-objects called <em>set</em> and <em>get</em>. Beneath these sub-objects are the names
+ of all the properties for that interface split across these two set/get
+ boundaries. For properties that are read/write the identical name may appear
+ under both <em>set</em> and <em>get</em>.
+ </br></br>
+ Methods or properties that are called will typically return two (or more)
+ parameters at a minimum.
+ <ul>
+ <li><strong>status</strong> (bool) <strong>True</strong> if the call completed without error, <strong>false</strong>
+ otherwise.</li>
+ </p>
+ <li><strong>arg1..argN|PendingCall|errName</strong> (any|userdata|string) If <strong>status</strong>
+ is <strong>true</strong> and proxy calls are configured to expect a reply, if the
+ ProxyController is configured to be blocking, the remote service return
+ values (arg1..argN) are returned. A non-blocking call expecting a reply will
+ result in a <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> being returned. If no reply
+ is expected then this argument will be the D-Bus serial number of the
+ request message.
+ If the <strong>status</strong> is <strong>false</strong> then generally a D-Bus error name is
+ returned.</li>
+ </p>
+ <li><strong>errMsg</strong> (string|nil) If <strong>status</strong> were <strong>false</strong> then the third
+ parameter would be an optional error message or <strong>nil</strong> if one
+ is not available.</li>
+ </ul>
+ </br></br>
+ Method and property calls can also result in a Lua error being thrown.
+ Generally these are reserved for truly exceptional conditions or programming
+ errors (e.g. wrong parameters, types, etc...). D-Bus error messages returned
+ by a remote service <strong>do not</strong> generate Lua errors but rather the error
+ name and message are returned with <strong>status</strong> set to <strong>false</strong>. In general
+ the calls on the proxy do not need to be made with a Lua protected
+ call (<em>pcall</em>) unless every possible exception needs to be caught.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name for which to retrieve
+ the proxy. This interface <strong>must</strong> be an element of the introspection
+ data. A Lua error is generated if the interface is not supported.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        The actual proxy for the remote service.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setTimeout"></a>
+    <strong>setTimeout&nbsp;(ctrl, timeout)</strong>
+    </dt>
+    <dd>
+    Sets the timeout to use for all proxy requests. </p>
+
+<p> This method sets the timeout used by all subsequent proxied calls on the
+ remote service. The timeout is specified in milliseconds. It is not possible
+ to set the timeout individually for each proxy method/property call unless
+ this method is called prior to the method/property invocation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">timeout</span>
+        <span class="types"><span class="type">number</span></span>
+       The timeout (in milliseconds) to use for subsequent
+ proxy requests. Two special values are allowed as well:
+ <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>
+ and <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>. The default
+ value (if none is specified) is <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getTimeout"></a>
+    <strong>getTimeout&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Gets the timeout used for all proxy requests. </p>
+
+<p> This method gets the timeout used by all proxied calls on the remote
+ service. The timeout is specified in milliseconds but may have two
+ special values: <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>
+ and <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        The proxy-wide timeout value in milliseconds.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setBlockingMode"></a>
+    <strong>setBlockingMode&nbsp;(ctrl, mode)</strong>
+    </dt>
+    <dd>
+    Sets the blocking mode used by the ProxyController to make calls. </p>
+
+<p> This method sets the blocking mode (<strong>true</strong> == blocking, <strong>false</strong> ==
+ non-blocking) used by proxied calls to a remote service. Blocking calls
+ will in fact block the thread of Lua execution. Non-blocking calls will
+ return a <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> object which the caller can use
+ to either block waiting for an answer or be notified later that a reply
+ has arrived.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">mode</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> for blocking mode,
+ <strong>false</strong> for non-blocking mode.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getBlockingMode"></a>
+    <strong>getBlockingMode&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Gets the blocking mode used by the ProxyController to make calls. </p>
+
+<p> This method returns the blocking mode of the ProxyController. If it returns
+ <strong>true</strong> then it will make <em>blocking</em> proxy calls. If it returns <strong>false</strong>
+ then it's configured to make <em>non-blocking</em> calls.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        The blocking mode where <strong>true</strong> == blocking,
+ <strong>false</strong> == non-blocking.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setProxyNoReplyNeeded"></a>
+    <strong>setProxyNoReplyNeeded&nbsp;(ctrl, mode)</strong>
+    </dt>
+    <dd>
+    Sets whether proxy method calls expect/need a reply from the far-end. </p>
+
+<p> This method determines whether proxy calls to the far-end need a response.
+ Specifically, if set to <strong>true</strong>, out-going messages are marked to indicate
+ that a reply is not needed so that the far-end can decide whether or not to
+ reply to the message. The far-end can always reply regardless of the flag
+ but it means the near-end will ignore the reply. The default setting for
+ the controller is <strong>false</strong> which means replies are expected from the
+ far-end. If set to <strong>true</strong> out-going messages are marked to indicate a
+ reply is not needed by using the call to <a href="../modules/l2dbus.proxyctrl.html#sendMessageNoReply">sendMessageNoReply</a> to transmit
+ the request message rather than <a href="../modules/l2dbus.proxyctrl.html#sendMessage">sendMessage</a>. This setting applies to
+ all subsequent proxy <em>method</em> calls made <em>after</em> the value is changed. The
+ behavior of individual proxy method calls can only be controlled by calling
+ this method <em>before</em> making the method call on the proxy.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">mode</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> if no reply is needed/expected,
+ <strong>false</strong> to indicate a reply is expected.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getProxyNoReplyNeeded"></a>
+    <strong>getProxyNoReplyNeeded&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Indicates whether proxy calls need/expect a reply from the far-end. </p>
+
+<p> This method returns an indication of whether proxy method calls expect a
+ reply from the far-end. If this returns <strong>true</strong> then no reply is needed
+ and proxy method calls will <strong>not</strong> wait to hear the reply to a request.
+ If <strong>false</strong> is returned (the default behavior) then it is expected that
+ proxy method calls will return a reply message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if no reply is expected from the far-end,
+ <strong>false</strong> (the default) if every proxy request expects a reply.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "connectSignal"></a>
+    <strong>connectSignal&nbsp;(ctrl, interface, sigName, handler)</strong>
+    </dt>
+    <dd>
+    Connects a handler to an interface's signal. </p>
+
+<p> This method registers a D-Bus <em>Match</em> handler for a signal on a specific
+ interface.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       A valid D-Bus interface name. This interface
+ must be defined in the introspection data for this ProxyController.</li>
+      <li><span class="parameter">sigName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The name of the D-Bus signal to connect the handler.</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span></span>
+       The handler that is called when the signal is received.
+ The signature of this handler is as follows:</p>
+<pre><code>    function onSignal(arg1, arg2, ..., argN)
+        ...
+    end
+</code></pre>
+<p> Where the arguments (argN) are defined the same as specified in the D-Bus
+ introspection XML description for the signal.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">lightuserdata</span></span>
+        An opaque handle to the connection that can be used
+ later to disconnect the handler.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "disconnectSignal"></a>
+    <strong>disconnectSignal&nbsp;(ctrl, hnd)</strong>
+    </dt>
+    <dd>
+    Disconnects the specified handler from the D-Bus signal. </p>
+
+<p> Given the opaque handle returned by <a href="../modules/l2dbus.proxyctrl.html#connectSignal">connectSignal</a> this method can
+ be used to disconnect the handler from that signal.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">hnd</span>
+        <span class="types"><span class="type">lightuserdata</span></span>
+       The opaque handle returned by <a href="../modules/l2dbus.proxyctrl.html#connectSignal">connectSignal</a></li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if disconnected successfully, <strong>false</strong>
+ otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "disconnectAllSignals"></a>
+    <strong>disconnectAllSignals&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Disconnects all the signal handlers from the ProxyController. </p>
+
+<p> The method disconnects <strong>all</strong> the signal handlers that have been connected
+ to all the interfaces. If a signal fails to be disconnected a Lua error
+ may be thrown indicating the disconnect failed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sendMessage"></a>
+    <strong>sendMessage&nbsp;(ctrl, msg)</strong>
+    </dt>
+    <dd>
+    Sends a D-Bus message depending on the blocking mode of the ProxyController. </p>
+
+<p> This method sends a D-Bus message depending on the blocking mode of the
+ ProxyController. If the blocking mode is set to <em>blocking</em> then the call
+ will wait on a reply (or timeout) and if everything is successful a
+ D-Bus message of type <a href="../namespaces/l2dbus.Message.html#METHOD_RETURN">METHOD_RETURN</a> is
+ returned. <em>Non-blocking</em> calls (on success) will return a
+ <a href="../namespaces/l2dbus.PendingCall.html#">PendingCsendMessageNoReplyall</a> object that the caller can use to
+ <a href="../modules/l2dbus.proxyctrl.html#waitForReply">wait</a> on or be notified of the reply. Proxy calls,
+ internally use this method to execute calls to remote services.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to send.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">userdata</span> or <span class="type">nil</span></span>
+         If the controller is configuring in a <em>non-blocking</em>
+ mode then return a <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> object if the message
+ is sent successfully otherwise return <strong>nil</strong>. If the controller is
+ configured in a <em>blocking</em> mode then either return the reply D-Bus message
+ (type = <a href="../namespaces/l2dbus.Message.html#METHOD_RETURN">METHOD_RETURN</a>) or <strong>nil</strong> if a
+ D-Bus error message is returned or another error is detected.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         If the first return argument is <strong>nil</strong> then return
+ the D-Bus error name associated with the error. If there was no error
+ or an error name was not provided then return <strong>nil</strong>.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         If the first return argument is <strong>nil</strong> then return
+ an optional error message associated with the error. If there was no error
+ or a message was not provided then return <strong>nil</strong>.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sendMessageNoReply"></a>
+    <strong>sendMessageNoReply&nbsp;(ctrl, msg)</strong>
+    </dt>
+    <dd>
+    Sends a D-Bus message indicating it does not expect a reply. </p>
+
+<p> This method provides an optimization for the called service indicating
+ the client is not waiting for a reply. The called service may either
+ choose not to send a reply, or if it does, the reply will be ignored and
+ discarded by the client. It's intent is to reduce the amount of round-trip
+ messaging to a minimum.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to send.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the message is sent successfully or
+ <strong>false</strong> if there was an error.</li>
+        <li>
+          <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+        Returns the D-Bus serial number of the message if
+ sent successfully or <strong>nil</strong> if it could not be sent.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "waitForReply"></a>
+    <strong>waitForReply&nbsp;(ctrl, pendingCall)</strong>
+    </dt>
+    <dd>
+    Waits for a reply from a pending call. </p>
+
+<p> This method is called with a <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> object
+ and uses it to wait for a reply from a remote service. How it
+ waits is largely dependent on whether or not this method was called
+ from the "main" Lua coroutine or a different one. Since the "main" Lua
+ coroutine cannot yield this call will translate into a purely blocking
+ call that will block the Lua VM. If it is <strong>not</strong> the main Lua
+ coroutine (or thread) then the coroutine will yield waiting for a
+ reply. When the reply or a timeout occurs the thread will be resumed
+ and the reply message returned. If this method is called from a secondary
+ coroutine then it <strong>MUST NOT</strong> be called via a Lua <em>pcall</em> (or
+ protected call) since this <em>waitForReply</em> may yield and under Lua 5.1
+ yielding across a protected call is not allowed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">pendingCall</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> object.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">userdata</span> or <span class="type">nil</span></span>
+         The reply message of type
+ <a href="../namespaces/l2dbus.Message.html#METHOD_RETURN">METHOD_RETURN</a> or <strong>nil</strong> if a D-Bus
+ error message was returned or another error detected.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         If the first return argument is <strong>nil</strong> then return
+ the D-Bus error name associated with the error. If there was no error
+ or an error name was not provided then return <strong>nil</strong>.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         If the first return argument is <strong>nil</strong> then return
+ an optional error message associated with the error. If there was no error
+ or a message was not provided then return <strong>nil</strong>.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "parseXml"></a>
+    <strong>parseXml&nbsp;(ctrl, xmlStr)</strong>
+    </dt>
+    <dd>
+    Parses D-Bus introspection XML data a returns a Lua table equivalent. </p>
+
+<p> This method parses D-Bus introspection data and converts it to an internal
+ Lua table representation which is used to generate the necessary proxy
+ objects. The XML parser used to parse this data is <strong>not</strong> a full-blown,
+ fully validating parser and has known limitations. See the <a href="../modules/l2dbus.xml.html#">l2dbus.xml</a>
+ module for more details.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The ProxyController instance.</li>
+      <li><span class="parameter">xmlStr</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       A string containing valid D-Bus instrospection XML
+ describing the interfaces exposed by a service object.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Returns a Lua table representation of the parsed XML
+ introspection. See <a href="../modules/l2dbus.proxyctrl.html#bindNoIntrospect">bindNoIntrospect</a> for a description of the layout
+ of this table.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

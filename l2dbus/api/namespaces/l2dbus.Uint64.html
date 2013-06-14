@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#l_dbus_Uint__">l2dbus.Uint64</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><strong>l2dbus.Uint64</strong></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Uint64</code></h1>
+
+<p>L2DBUS Uint64</p>
+
+<p> This section describes a Lua Uint64 type used to manipulate D-Bus Uint64 types
+ in the Lua environment.</p>
+<p> Since Lua's fundamental numerical type in most installations is a floating
+ point number (a 'C' double or float), supporting D-Bus Uint64 types without
+ loss of precision is problematic. As a result a Lua Uint64 type was created
+ to wrap D-Bus Uint64 types and provide a means to manipulate and print these
+ types from Lua. Likewise, these types can be added as arguments to D-Bus
+ messages where they will be converted correctly to the underlying D-Bus
+ Uint64 type.</p>
+
+<p> Several numerical operations are supported by this type. For binary operations
+ the "other" number is first cast to an Uint64 before the operator is applied.
+ What this means is that standard Lua numbers which are floating point will be
+ truncated and potentially lose information. Please be aware of this limitation
+ when operating on these types. The operators supported include:</p>
+
+<p> <ul>
+ <li>Addition (+)</li>
+ <li>Subtraction (-)</li>
+ <li>Multiplication (*)</li>
+ <li>Division (/) </li>
+ <li>Modulus (%)</li>
+ <li>Negation (-)</li>
+ <li>Equal (==)</li>
+ <li>Less Than (&lt;)</li>
+ <li>Less Than Equal (&lt;=)</li>
+ <li>Greater Than (>)</li>
+ <li>Greater Than Equal (>=)</li>
+ </ul></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(value, base)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#l_dbus_Uint__">l2dbus.Uint64</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#toNumber">toNumber&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toString">toString&nbsp;(value)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(value, base)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new Uint64 value.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">number</span> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The number to convert to an Uint64. If passed
+ in as a string the <a href="http://www.manpagez.com/man/3/strtoul/">strtoul()</a>
+ function is used to convert the number to a numerical value.</li>
+      <li><span class="parameter">base</span>
+        <span class="types">optional <span class="type">number</span></span>
+       The base must be in the range [2, 36] or equal to 0.
+ See <a href="http://www.manpagez.com/man/3/strtoul/">strtoul()</a> for
+ more details.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        The userdata object representing an Uint64.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="l_dbus_Uint__"></a>l2dbus.Uint64</h2>
+    <dl class="function">
+    <dt>
+    <a name = "toNumber"></a>
+    <strong>toNumber&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Converts the Uint64 to a Lua number.</p>
+
+<p> In converting the Uint64 to a Lua number there is the chance of losing
+ precision since Lua number's typically cannot precisely represent all
+ integral values. For a Lua double this range is [-2^52, 2^52 -1].
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Uint64 value to convert to a Lua number.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        A (possibly) equivalent Lua number.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toString"></a>
+    <strong>toString&nbsp;(value)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Converts the Uint64 to a string.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">value</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Uint64 value to convert to a string.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        A string representing the Uint64.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Constants">Constants</a></li>
+<li><a href="#Dispatcher">Dispatcher</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><strong>l2dbus.Dispatcher</strong></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Dispatcher</code></h1>
+
+<p>The L2DBUS Event Dispatcher Object</p>
+
+<p> This namespace provides a constructor and methods for manipulating the
+ D-Bus event Dispatcher object.</p>
+<p> A Dispatcher is responsible for
+ running the event loop that detects incoming D-Bus messages and
+ timeouts and also dispatches outgoing messages and signals.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(Main)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Constants">Constants</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DISPATCH_WAIT">DISPATCH_WAIT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DISPATCH_NO_WAIT">DISPATCH_NO_WAIT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DISPATCH_ONCE">DISPATCH_ONCE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Dispatcher">Dispatcher</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#run">run&nbsp;(disp, runOpt)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stop">stop&nbsp;(disp)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(Main)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new L2DBUS Dispatcher.</p>
+
+<p> Constructs a new Dispatcher using the provided main loop.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">Main</span>
+        <span class="types"><span class="type">userdata</span></span>
+       loop to be used by the dispatcher.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Dispatcher userdata object
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Constants"></a>Constants</h2>
+    <dl class="function">
+    <dt>
+    <a name = "DISPATCH_WAIT"></a>
+    <strong>DISPATCH_WAIT</strong>
+    </dt>
+    <dd>
+
+ Calls to <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> with this option block waiting for successive events until <a href="../namespaces/l2dbus.Dispatcher.html#stop">stop</a> is called on
+ the Dispatcher.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DISPATCH_NO_WAIT"></a>
+    <strong>DISPATCH_NO_WAIT</strong>
+    </dt>
+    <dd>
+
+ Calls to <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> with this option do <b>not</b> block waiting for events and it immediately
+ returns if there are no events to dispatch. If an event is already ready to be dispatched it
+ will be processed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DISPATCH_ONCE"></a>
+    <strong>DISPATCH_ONCE</strong>
+    </dt>
+    <dd>
+
+ Calls to <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> with this option block waiting for one event before immediately returning.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Dispatcher"></a>Dispatcher</h2>
+    <dl class="function">
+    <dt>
+    <a name = "run"></a>
+    <strong>run&nbsp;(disp, runOpt)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Invokes the dispatcher to process messages and timeouts.</p>
+
+<p> This method should be called to process one or more events
+ depending on the <em>run</em> option provided.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">disp</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Dispatcher instance.</li>
+      <li><span class="parameter">runOpt</span>
+        <span class="types"><span class="type">number</span></span>
+       One of the constant run options</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if dispatcher successfully ran
+ one or more event iterations. Returns <strong>false</strong> on error.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        An error message in the event of an error</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "stop"></a>
+    <strong>stop&nbsp;(disp)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Stops the dispatcher and causes <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> to exit.</p>
+
+<p> This is used to break out of the dispatch loop entered by calling
+ <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> on the dispatcher. A Lua error is thrown if the dispatcher
+ cannot be stopped.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">disp</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Dispatcher instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        True if dispatcher stops
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

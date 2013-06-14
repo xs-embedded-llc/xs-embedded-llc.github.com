@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Constants">Constants</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><strong>l2dbus.Trace</strong></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Trace</code></h1>
+
+<p>L2DBUS Trace</p>
+
+<p> This section describes a L2DBUS Trace capabilities.</p>
+<p> The L2DBUS module can (optionally) be compiled with internal diagnostic
+ tracing support. The build flag <strong>TRACE</strong> enables or disables the trace
+ output by being defined or undefined (#define/#undef) when the module is
+ compiled. If the module has been built with trace support then the functions
+ in this module will control the types of trace messages that are emitted to
+ stderr.</p>
+
+<p> The trace flags associated with this module are not strictly <em>levels</em> of
+ trace but rather discrete channels. This means that <a href="../namespaces/l2dbus.Trace.html#ERROR">ERROR</a> traces can
+ be turned <em>on</em> while <a href="../namespaces/l2dbus.Trace.html#INFO">INFO</a>, <a href="../namespaces/l2dbus.Trace.html#WARN">WARN</a> or <a href="../namespaces/l2dbus.Trace.html#DEBUG">DEBUG</a> might be suppressed if not
+ explicitly enabled (or turned <em>on</em>}. Treat these <em>levels</em> as individual flags
+ that can be selectively enabled or disabled.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#setFlags">setFlags&nbsp;(args)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getFlags">getFlags&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Constants">Constants</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#OFF">OFF</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FATAL">FATAL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR">ERROR</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#WARN">WARN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INFO">INFO</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DEBUG">DEBUG</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TRACE">TRACE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ALL">ALL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "setFlags"></a>
+    <strong>setFlags&nbsp;(args)</strong>
+    </dt>
+    <dd>
+
+<p> </p>
+
+<p> Sets the trace flags for the module.</p>
+
+<p> Multiple trace flags can be turned on at once, e.g.</p>
+
+<pre><code> l2dbus.Trace.setFlags(l2dbus.Trace.WARN, l2dbus.Trace.ERROR)
+</code></pre>
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">args</span>
+        <span class="types"><span class="type">...</span></span>
+       A list of parameters to turn <em>on</em>.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getFlags"></a>
+    <strong>getFlags&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Retrieves the trace flags that are currently enabled (<em>on</em>).</p>
+
+<p> A Lua table is returned with the following format:</p>
+
+<pre><code> {
+     mask = 6,      -- A bitmask of all the enabled flags OR'ed together
+     flags = {2, 4} -- An array of l2dbus.Trace.XXXX trace/flag constants
+ }
+</code></pre>
+
+<p> If there are no flags set then the <strong>flags</strong> field references an empty Lua
+ table/array.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        flags A table contains information of what flags are enabled.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Constants"></a>Constants</h2>
+    <dl class="function">
+    <dt>
+    <a name = "OFF"></a>
+    <strong>OFF</strong>
+    </dt>
+    <dd>
+
+ This flag disables all tracing.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FATAL"></a>
+    <strong>FATAL</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>FATAL</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR"></a>
+    <strong>ERROR</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>ERROR</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "WARN"></a>
+    <strong>WARN</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>WARN</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INFO"></a>
+    <strong>INFO</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>INFO</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DEBUG"></a>
+    <strong>DEBUG</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>DEBUG</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TRACE"></a>
+    <strong>TRACE</strong>
+    </dt>
+    <dd>
+
+ This flag controls the output of <em>TRACE</em> category trace messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ALL"></a>
+    <strong>ALL</strong>
+    </dt>
+    <dd>
+
+ This flag turns <em>on</em> (enables) all the trace flags.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

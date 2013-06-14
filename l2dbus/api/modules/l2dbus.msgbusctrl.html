@@ -1,0 +1,622 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#MsgBusController">MsgBusController</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><strong>l2dbus.msgbusctrl</strong></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>l2dbus.msgbusctrl</code></h1>
+
+<p>Message Bus Controller Module.</p>
+<p> This module provides a controller for the D-Bus Message Bus which implements
+ the <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-bus">
+ org.freedesktop.DBus</a> interface. The controller provides methods to gain
+ access to the proxy interface of the Message Bus where methods can be called
+ and signals received from the service.
+ </p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(conn)</a></td>
+	<td class="summary">Constructs a new Message Bus Controller (MsgBusController) instance.</td>
+	</tr>
+</table>
+<h2><a href="#MsgBusController">MsgBusController</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#bind">bind&nbsp;(ctrl, doIntrospect)</a></td>
+	<td class="summary">Binds the controller to the Message Bus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unbind">unbind&nbsp;(ctrl)</a></td>
+	<td class="summary">Unbinds the controller from the Message Bus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getIntrospectionData">getIntrospectionData&nbsp;(ctrl)</a></td>
+	<td class="summary">Returns the parsed introspection data for the Message Bus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getProxy">getProxy&nbsp;(ctrl)</a></td>
+	<td class="summary">Returns the actual proxy for the Message Bus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setTimeout">setTimeout&nbsp;(ctrl, timeout)</a></td>
+	<td class="summary">Sets the timeout for accessing method/properties of the Message Bus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getTimeout">getTimeout&nbsp;(ctrl)</a></td>
+	<td class="summary">Gets the global timeout value used by the Message Bus proxy.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setProxyNoReplyNeeded">setProxyNoReplyNeeded&nbsp;(ctrl, mode)</a></td>
+	<td class="summary">Sets whether Message Bus proxy method calls expect/need a reply.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getProxyNoReplyNeeded">getProxyNoReplyNeeded&nbsp;(ctrl)</a></td>
+	<td class="summary">Indicates whether Message Bus proxy calls need/expect a reply.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBlockingMode">setBlockingMode&nbsp;(ctrl, mode)</a></td>
+	<td class="summary">Sets whether proxy calls to the Message Bus are blocking or unblocking.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getBlockingMode">getBlockingMode&nbsp;(ctrl)</a></td>
+	<td class="summary">Retrieves whether proxy calls are blocking or non-blocking.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#connectSignal">connectSignal&nbsp;(ctrl, sigName, handler)</a></td>
+	<td class="summary">Connects a handler for a specific Message Bus signal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#disconnectSignal">disconnectSignal&nbsp;(ctrl, hnd)</a></td>
+	<td class="summary">Disconnects a handler from a specific Message Bus signal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#disconnectAllSignals">disconnectAllSignals&nbsp;(ctrl)</a></td>
+	<td class="summary">Disconnects from <strong>all</strong> signals of the Message Bus.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+    Constructs a new Message Bus Controller (MsgBusController) instance. </p>
+
+<p> The constructor for a Message Bus Controller is used to call methods
+ and receive signals from the D-Bus Message Bus service.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Connection.html#">Connection</a> to attach
+ the controller to.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        A MsgBusController instance.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="MsgBusController"></a>MsgBusController</h2>
+    <dl class="function">
+    <dt>
+    <a name = "bind"></a>
+    <strong>bind&nbsp;(ctrl, doIntrospect)</strong>
+    </dt>
+    <dd>
+    Binds the controller to the Message Bus. </p>
+
+<p> This method may throw a Lua error if an exceptional (unexpected) error
+ occurs.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+      <li><span class="parameter">doIntrospect</span>
+        <span class="types"><span class="type">bool</span></span>
+       If set to <strong>true</strong> the controller will make an
+ introspection call on the Message Bus service. If set to <strong>false</strong>
+ (the default) the controller will use cached introspection data
+ to generate the proxy interface.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">true</span> or <span class="type">nil</span></span>
+        Returns <strong>true</strong> if the binding operation succeeds
+ or <strong>nil</strong> on failure.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns an error name or <strong>nil</strong> if a name is
+ unavailable and the binding operation fails.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns an error message or <strong>nil</strong> if a message is
+ unavailable and the binding operation fails.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unbind"></a>
+    <strong>unbind&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Unbinds the controller from the Message Bus. </p>
+
+<p> Once unbound, methods on the Message Bus proxy should no longer be called.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getIntrospectionData"></a>
+    <strong>getIntrospectionData&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Returns the parsed introspection data for the Message Bus. </p>
+
+<p> The returned Lua table is a representation of the D-Bus XML data in a
+ format that is understood by the proxy. Internally the proxy does <strong>not</strong>
+ maintain the original D-Bus XML description.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A Lua table containing the parsed introspection data for
+ the Message Bus.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getProxy"></a>
+    <strong>getProxy&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Returns the actual proxy for the Message Bus. </p>
+
+<p> The Message Bus Controller controls the configuration and behavior of
+ the actual proxy implementation. The proxy object contains both the
+ method signatures and properties of the Message Bus service itself and
+ can be used to directly call methods or interrogate properties on the
+ remote service.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Returns the Message Bus proxy instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setTimeout"></a>
+    <strong>setTimeout&nbsp;(ctrl, timeout)</strong>
+    </dt>
+    <dd>
+    Sets the timeout for accessing method/properties of the Message Bus. </p>
+
+<p> The timeout (in milliseconds) controls how long the proxy will wait to
+ hear from the Message Bus service before timing out. All calls through
+ the proxy interface will use this <em>global</em> timeout when a D-Bus request
+ message is issued on the bus. The controller does not offer a per
+ method/property timeout but instead applies the timeout to all
+ future requests.</p>
+
+<p> The timeout value may be set to two well-know <em>special</em>
+ values: <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a> or
+ <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+      <li><span class="parameter">timeout</span>
+        <span class="types"><span class="type">number</span></span>
+       The time in milliseconds to set as the timeout
+ for future calls to the Message Bus. This value applies globally to all
+ method/property calls. The timeout value must be non-negative.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getTimeout"></a>
+    <strong>getTimeout&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Gets the global timeout value used by the Message Bus proxy. </p>
+
+<p> Returns the timeout value used by the proxy when making method calls or
+ manipulating properties.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+         The timeout (in milliseconds) used by the proxy. It
+ may be one of the <em>special</em> values: <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>
+ or <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setProxyNoReplyNeeded"></a>
+    <strong>setProxyNoReplyNeeded&nbsp;(ctrl, mode)</strong>
+    </dt>
+    <dd>
+    Sets whether Message Bus proxy method calls expect/need a reply. </p>
+
+<p> This method determines whether proxy calls to the Message Bus need a
+ response. Specifically, if set to <strong>true</strong>, out-going messages are marked to
+ indicate that a reply is not needed so that the Message Bus can decide
+ whether or not to reply to the message. The Message Bus can always reply
+ regardless of the flag but it means the near-end will ignore the reply. The
+ default setting for the controller is <strong>false</strong> which means replies are
+ expected from the far-end. If set to <strong>true</strong> out-going messages are marked
+ to indicate a reply is not needed. This setting applies to all subsequent
+ proxy <em>method</em> calls made <em>after</em> the value is changed. The behavior of
+ individual proxy method calls can only be controlled by calling this method
+ <em>before</em> making the method call on the Message Bus proxy.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The Message Bus controller instance.</li>
+      <li><span class="parameter">mode</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> if no reply is needed/expected,
+ <strong>false</strong> to indicate a reply is expected.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getProxyNoReplyNeeded"></a>
+    <strong>getProxyNoReplyNeeded&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Indicates whether Message Bus proxy calls need/expect a reply. </p>
+
+<p> This method returns an indication of whether Message Bus proxy method calls
+ expect a reply. If this returns <strong>true</strong> then no reply is needed and proxy
+ method calls will <strong>not</strong> wait to hear the reply to a request. If <strong>false</strong>
+ is returned (the default behavior) then it is expected that proxy method
+ calls will return a reply message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The Message Bus controller instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if no reply is expected from the Message Bus,
+ <strong>false</strong> (the default) if every proxy request expects a reply.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setBlockingMode"></a>
+    <strong>setBlockingMode&nbsp;(ctrl, mode)</strong>
+    </dt>
+    <dd>
+    Sets whether proxy calls to the Message Bus are blocking or unblocking. </p>
+
+<p> This option determines whether calls made through the proxy are blocking
+ (synchronous) or non-blocking (asynchronous) calls. A blocking call will
+ block waiting for the reply or a timeout error before returning. A
+ non-blocking call will return a <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> object
+ which can be used to wait for a reply or for registering a handler that will
+ be called when the reply or error is returned. Once set this option applies
+ globally to all methods/properties of the Message Bus proxy.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+      <li><span class="parameter">mode</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> if proxy calls should be blocking and
+ <strong>false</strong> for non-blocking (asynchronous) calls.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getBlockingMode"></a>
+    <strong>getBlockingMode&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Retrieves whether proxy calls are blocking or non-blocking. </p>
+
+<p> Returns the current option for call to methods/properties of the
+ Message Bus service.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> for blocking mode and <strong>false</strong> for
+ non-blocking mode.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "connectSignal"></a>
+    <strong>connectSignal&nbsp;(ctrl, sigName, handler)</strong>
+    </dt>
+    <dd>
+    Connects a handler for a specific Message Bus signal. </p>
+
+<p> This method registers a signal handler for the specified Message Bus
+ signal name. When a matching signal is emitted by the Message Bus the
+ handler function will be called as a result. The signature of the handler
+ function should match the signature specified by the D-Bus XML signal
+ description for the Message Bus.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+      <li><span class="parameter">sigName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The name of the Message Bus signal to receive.</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span></span>
+       The signal handler function which is called with the
+ same arguments as specified for the signal in the D-Bus XML description
+ for the <em>org.freedesktop.DBus</em> interface. </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">lightuserdata</span> or <span class="type">nil</span></span>
+         Returns an opaque handle that can be used to
+ <a href="../modules/l2dbus.msgbusctrl.html#disconnectSignal">disconnect</a> the handler. Can be <strong>nil</strong> if there was an
+ error connecting to the signal.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "disconnectSignal"></a>
+    <strong>disconnectSignal&nbsp;(ctrl, hnd)</strong>
+    </dt>
+    <dd>
+    Disconnects a handler from a specific Message Bus signal. </p>
+
+<p> This method disconnects the signal handler with the specified handle
+ returned by <a href="../modules/l2dbus.msgbusctrl.html#connectSignal">connectSignal</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+      <li><span class="parameter">hnd</span>
+        <span class="types"><span class="type">lightuserdata</span></span>
+       The opaque handle originally returned by the call
+ to <a href="../modules/l2dbus.msgbusctrl.html#connectSignal">connectSignal</a>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the handler was disconnected successfully
+ otherwise <strong>false</strong>.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "disconnectAllSignals"></a>
+    <strong>disconnectAllSignals&nbsp;(ctrl)</strong>
+    </dt>
+    <dd>
+    Disconnects from <strong>all</strong> signals of the Message Bus. </p>
+
+<p> This method makes a best effort to disconnects all the signal handlers for
+ all Message Bus signals.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctrl</span>
+        <span class="types"><span class="type">userdata</span></span>
+       Message Bus controller instance.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

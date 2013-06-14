@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Purpose">Purpose</a></li>
+<li><a href="#High_Level_Architecture">High Level Architecture</a></li>
+<li><a href="#Threading">Threading</a></li>
+<li><a href="#Modules">Modules</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+
+
+<h2>Topics</h2>
+<ul>
+  <li><strong>01-introduction.md</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Topic <code>01-introduction.md</code></h1>
+
+
+<h2>Introduction</h2>
+<hr/>
+<p><a name="Purpose"></a></p>
+<h3>Purpose</h3>
+
+<p>Lua-to-D-Bus (L2DBUS) is a Lua module that provides a <em>nearly</em> complete binding to the D-Bus IPC service. It is not, however, a complete re-implementation of the D-Bus protocol in Lua but instead leverages the tested D-Bus reference library which implements the lower-level protocol stack. What L2DBUS does provide, however, is access to lower-level features of D-Bus along with a higher level abstraction to make developing Lua D-Bus clients and services easier. These capabilities make it entirely feasible to re-implement a low level program like <em>dbus-monitor</em> in Lua as well more complex client/server applications. In this respect the Lua binding is similar to the popular D-Bus Python binding without the implicit GLib/GObject dependency. Hopefully L2DBUS strikes a balance between both low and high level APIs so that there really isn't any D-Bus related feature that is not available to the developer.</p>
+
+<p>The library was originally developed under Lua 5.1 but was designed so that it builds under Lua 5.2 or LuaJIT. Testing under Lua 5.2 and LuaJIT, however, has not been done (<em>yet</em>). This library was designed for embedded system environments (Linux) but that should not prevent it from being used in the desktop environments either. Unfortunately, at this time Windows is not supported since it is a rare combination to be running D-Bus on a Microsoft operating system.</p>
+
+<p><a name="High_Level_Architecture"></a></p>
+<h3>High Level Architecture</h3>
+
+<p><center><img src="./l2dbus_architecture.png?raw=true" alt="High Level L2DBUS Architecture"/></center></p>
+
+<p>The L2DBUS Lua module is actually composed of several components. These components, from the bottom up, are described as follows:</p>
+
+<ul>
+    <li><p><strong>D-Bus Reference Library</strong>: Low-level "C" reference library designed for language binding courtesy of Freedesktop.org.</p></li>
+    <li><p><strong>CDBUS</strong>: A thin "veneer" over the D-Bus reference library the provides useful abstractions. This library can be used directly for "C" D-Bus application development. Main-loop integration is provided by two different (optional) back-ends: libev and Glib. A framework exists to introduce other back-ends as needed (e.g. ecore, Qt, etc...).</p></li>
+    <li><p><strong>L2DBUS Core</strong>: Core Lua "C" module that binds with the D-Bus reference library and CDBUS. Written in pure "C". Main loop intregration is carried forward from CDBUS with two back-ends currently supported: libev and Glib. Both main loops can optionally be compiled. L2DBUS "core" isn't directly dependent on either main loop implementation.</p></li>
+    <li><p><strong>Lua L2DBUS</strong>: A Lua layer providing higher level D-Bus service/proxy abstractions.</p></li>
+    <li><p><strong>Lua Applications</strong>: Lua applications can implement both D-Bus services and clients using synchronous and asynchronous D-Bus programming models.</p></li>
+</ul>
+
+<p><a name="Threading"></a></p>
+<h3>Threading</h3>
+
+<p>The library itself is single-threaded and includes support for main-loop integration using different back-ends. Initially two main loop back-ends are supported: <a href="http://software.schmorp.de/pkg/libev.html">libev</a> and <a href="https://developer.gnome.org/glib/">Glib</a>. Both synchronous and asynchronous D-Bus features are available where the asynchronous features work nicely with Lua's native cooperative, coroutine based threading. It is <strong>not</strong> necessary to introduce operating system threads (e.g. pthreads) into an application in order to implement D-Bus clients or services (or both). Fundamentally, the underlying D-Bus reference library only partially supports a threaded OS environment and Lua out-of-the-box doesn't explicitly address this use case. The recommendation, therefore, is <strong>not</strong> to pursue such an approach without great care and full understanding of the code (<em>there be dragons here</em>).</p>
+
+<p><a name="Modules"></a></p>
+<h3>Modules</h3>
+
+<p>The L2DBUS package actually consists of several separate modules. Only one (<em>l2dbus</em>) represents the core module and contains both the lower level D-Bus functions along with several useful abstractions (e.g. Timer, Watch, Interface, etc...) and a D-Bus <em>type</em> system for accurately marshalling/unmarshalling code to and from D-Bus messages. Within the L2DBUS <em>core</em> module these functions and classes are placed into separate logical namespaces beneath the module name. To access these namespaces from code you can do something like:</p>
+
+
+<pre>
+ <span class="keyword">local</span> l2dbus = <span class="global">require</span>(<span class="string">"l2dbus"</span>)
+ <span class="keyword">local</span> timer = l2dbus.Timer.new(...)
+</pre>
+
+<p>There are two separate (and optional) Lua modules that implement the main loop back-end. Currently, two different back-ends are supported: <a href="http://software.schmorp.de/pkg/libev.html">libev</a> and <a href="https://developer.gnome.org/glib/">Glib</a>. When the L2DBUS package is built these two main loop back-ends can optionally be built if the necessary dependencies are satisfied. Regardless, you need at least one main-loop back-end in order to instantiate a Dispatcher instance that runs the main loop. If built, a main loop can be instantiated as shown:</p>
+
+
+<pre>
+ <span class="keyword">local</span> mainLoop = <span class="global">require</span>(<span class="string">"l2dbus_ev"</span>).MainLoop.new()
+</pre>
+
+<p>or</p>
+
+
+<pre>
+ <span class="keyword">local</span> mainLoop = <span class="global">require</span>(<span class="string">"l2dbus_glib"</span>).MainLoop.new()
+</pre>
+
+<p>The remaining modules are written in pure Lua and generally provide convenience functions or abstractions over D-Bus client proxies and services. Since these are modules they need to be <em>required</em> separately:</p>
+
+
+<pre>
+ <span class="keyword">local</span> xml = <span class="global">require</span>(<span class="string">"l2dbus.xml"</span>)
+</pre>
+
+<p>The L2DBUS modules do <strong>not</strong> pollute the global namespace when required. Instead the result of the Lua <em>require</em> should be associated with a Lua variable as shown in the previous examples.</p>
+
+<p><a name="Examples"></a></p>
+<h3>Examples</h3>
+
+<p>The <strong>test</strong> directory of the project contains several example programs that illustrate how to use the binding to write real programs. Most of these were developed to test the functionality of the binding and are not <em>production</em> quality implementations. Nonetheless, caveats aside, they do provide helpful examples. </p>
+
+
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

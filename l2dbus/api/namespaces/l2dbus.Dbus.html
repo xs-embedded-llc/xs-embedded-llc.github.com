@@ -1,0 +1,1790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Constants">Constants</a></li>
+<li><a href="#Message_Types">Message Types</a></li>
+<li><a href="#Message_Handler_Return_Values">Message Handler Return Values</a></li>
+<li><a href="#D_Bus_Errors">D-Bus Errors</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><strong>l2dbus.Dbus</strong></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Dbus</code></h1>
+
+<p>L2DBUS Shared D-Bus constants</p>
+
+<p> This namespace defines shared D-Bus constants that are typically utilized by
+ related L2DBUS components.</p>
+<p> These constants directly correspond to their 'C' D-Bus reference library
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusShared.html">equivalents</a>
+ and protocol <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusProtocol.html">definitions</a>.</p>
+
+
+<h2><a href="#Constants">Constants</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#SERVICE_DBUS">SERVICE_DBUS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PATH_DBUS">PATH_DBUS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PATH_LOCAL">PATH_LOCAL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INTERFACE_DBUS">INTERFACE_DBUS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INTERFACE_INTROSPECTABLE">INTERFACE_INTROSPECTABLE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INTERFACE_PROPERTIES">INTERFACE_PROPERTIES</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INTERFACE_PEER">INTERFACE_PEER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#INTERFACE_LOCAL">INTERFACE_LOCAL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NAME_FLAG_ALLOW_REPLACEMENT">NAME_FLAG_ALLOW_REPLACEMENT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NAME_FLAG_REPLACE_EXISTING">NAME_FLAG_REPLACE_EXISTING</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NAME_FLAG_DO_NOT_QUEUE">NAME_FLAG_DO_NOT_QUEUE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#REQUEST_NAME_REPLY_PRIMARY_OWNER">REQUEST_NAME_REPLY_PRIMARY_OWNER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#REQUEST_NAME_REPLY_IN_QUEUE">REQUEST_NAME_REPLY_IN_QUEUE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#REQUEST_NAME_REPLY_EXISTS">REQUEST_NAME_REPLY_EXISTS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#REQUEST_NAME_REPLY_ALREADY_OWNER">REQUEST_NAME_REPLY_ALREADY_OWNER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RELEASE_NAME_REPLY_RELEASED">RELEASE_NAME_REPLY_RELEASED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RELEASE_NAME_REPLY_NON_EXISTENT">RELEASE_NAME_REPLY_NON_EXISTENT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RELEASE_NAME_REPLY_NOT_OWNER">RELEASE_NAME_REPLY_NOT_OWNER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#START_REPLY_SUCCESS">START_REPLY_SUCCESS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#START_REPLY_ALREADY_RUNNING">START_REPLY_ALREADY_RUNNING</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BUS_SESSION">BUS_SESSION</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BUS_SYSTEM">BUS_SYSTEM</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BUS_STARTER">BUS_STARTER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Message_Types">Message Types</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#MESSAGE_TYPE_INVALID">MESSAGE_TYPE_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Message_Handler_Return_Values">Message Handler Return Values</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#HANDLER_RESULT_HANDLED">HANDLER_RESULT_HANDLED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HANDLER_RESULT_NOT_YET_HANDLED">HANDLER_RESULT_NOT_YET_HANDLED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HANDLER_RESULT_NEED_MEMORY">HANDLER_RESULT_NEED_MEMORY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#D_Bus_Errors">D-Bus Errors</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_FAILED">ERROR_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NO_MEMORY">ERROR_NO_MEMORY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SERVICE_UNKNOWN">ERROR_SERVICE_UNKNOWN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NAME_HAS_NO_OWNER">ERROR_NAME_HAS_NO_OWNER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NO_REPLY">ERROR_NO_REPLY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_IO_ERROR">ERROR_IO_ERROR</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_BAD_ADDRESS">ERROR_BAD_ADDRESS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NOT_SUPPORTED">ERROR_NOT_SUPPORTED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_LIMITS_EXCEEDED">ERROR_LIMITS_EXCEEDED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_ACCESS_DENIED">ERROR_ACCESS_DENIED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_AUTH_FAILED">ERROR_AUTH_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NO_SERVER">ERROR_NO_SERVER</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_TIMEOUT">ERROR_TIMEOUT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_NO_NETWORK">ERROR_NO_NETWORK</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_ADDRESS_IN_USE">ERROR_ADDRESS_IN_USE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_DISCONNECTED">ERROR_DISCONNECTED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_INVALID_ARGS">ERROR_INVALID_ARGS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_FILE_NOT_FOUND">ERROR_FILE_NOT_FOUND</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_FILE_EXISTS">ERROR_FILE_EXISTS</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_UNKNOWN_METHOD">ERROR_UNKNOWN_METHOD</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_UNKNOWN_OBJECT">ERROR_UNKNOWN_OBJECT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_UNKNOWN_INTERFACE">ERROR_UNKNOWN_INTERFACE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_UNKNOWN_PROPERTY">ERROR_UNKNOWN_PROPERTY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_PROPERTY_READ_ONLY">ERROR_PROPERTY_READ_ONLY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_TIMED_OUT">ERROR_TIMED_OUT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_MATCH_RULE_NOT_FOUND">ERROR_MATCH_RULE_NOT_FOUND</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_MATCH_RULE_INVALID">ERROR_MATCH_RULE_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_EXEC_FAILED">ERROR_SPAWN_EXEC_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_FORK_FAILED">ERROR_SPAWN_FORK_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_CHILD_EXITED">ERROR_SPAWN_CHILD_EXITED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_CHILD_SIGNALED">ERROR_SPAWN_CHILD_SIGNALED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_FAILED">ERROR_SPAWN_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_SETUP_FAILED">ERROR_SPAWN_SETUP_FAILED</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_CONFIG_INVALID">ERROR_SPAWN_CONFIG_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_SERVICE_INVALID">ERROR_SPAWN_SERVICE_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_SERVICE_NOT_FOUND">ERROR_SPAWN_SERVICE_NOT_FOUND</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_PERMISSIONS_INVALID">ERROR_SPAWN_PERMISSIONS_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_FILE_INVALID">ERROR_SPAWN_FILE_INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SPAWN_NO_MEMORY">ERROR_SPAWN_NO_MEMORY</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_UNIX_PROCESS_ID_UNKNOWN">ERROR_UNIX_PROCESS_ID_UNKNOWN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_INVALID_SIGNATURE">ERROR_INVALID_SIGNATURE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_INVALID_FILE_CONTENT">ERROR_INVALID_FILE_CONTENT</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN">ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_ADT_AUDIT_DATA_UNKNOWN">ERROR_ADT_AUDIT_DATA_UNKNOWN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_OBJECT_PATH_IN_USE">ERROR_OBJECT_PATH_IN_USE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR_INCONSISTENT_MESSAGE">ERROR_INCONSISTENT_MESSAGE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Constants"></a>Constants</h2>
+    <dl class="function">
+    <dt>
+    <a name = "SERVICE_DBUS"></a>
+    <strong>SERVICE_DBUS</strong>
+    </dt>
+    <dd>
+
+ The bus name used to talk to the bus itself.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PATH_DBUS"></a>
+    <strong>PATH_DBUS</strong>
+    </dt>
+    <dd>
+
+ The object path used to talk to the bus itself.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PATH_LOCAL"></a>
+    <strong>PATH_LOCAL</strong>
+    </dt>
+    <dd>
+
+ The object path used in local/in-process-generated messages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INTERFACE_DBUS"></a>
+    <strong>INTERFACE_DBUS</strong>
+    </dt>
+    <dd>
+
+ The interface exported by the object with <a href="../namespaces/l2dbus.Dbus.html#SERVICE_DBUS">SERVICE_DBUS</a> and <a href="../namespaces/l2dbus.Dbus.html#PATH_DBUS">PATH_DBUS</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INTERFACE_INTROSPECTABLE"></a>
+    <strong>INTERFACE_INTROSPECTABLE</strong>
+    </dt>
+    <dd>
+
+ The interface supported by introspectable objects.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INTERFACE_PROPERTIES"></a>
+    <strong>INTERFACE_PROPERTIES</strong>
+    </dt>
+    <dd>
+
+ The interface supported by objects with properties.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INTERFACE_PEER"></a>
+    <strong>INTERFACE_PEER</strong>
+    </dt>
+    <dd>
+
+ The interface supported by most dbus peers.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "INTERFACE_LOCAL"></a>
+    <strong>INTERFACE_LOCAL</strong>
+    </dt>
+    <dd>
+
+ This is a special interface whose methods can only be invoked by
+ the local implementation (messages from remote apps aren't allowed
+ to specify this interface).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NAME_FLAG_ALLOW_REPLACEMENT"></a>
+    <strong>NAME_FLAG_ALLOW_REPLACEMENT</strong>
+    </dt>
+    <dd>
+
+ Allow another service to become the primary owner if requested.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NAME_FLAG_REPLACE_EXISTING"></a>
+    <strong>NAME_FLAG_REPLACE_EXISTING</strong>
+    </dt>
+    <dd>
+
+ Request to replace the current primary owner.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NAME_FLAG_DO_NOT_QUEUE"></a>
+    <strong>NAME_FLAG_DO_NOT_QUEUE</strong>
+    </dt>
+    <dd>
+
+ If we can not become the primary owner do not place us in the queue.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "REQUEST_NAME_REPLY_PRIMARY_OWNER"></a>
+    <strong>REQUEST_NAME_REPLY_PRIMARY_OWNER</strong>
+    </dt>
+    <dd>
+
+ Service has become the primary owner of the requested name.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "REQUEST_NAME_REPLY_IN_QUEUE"></a>
+    <strong>REQUEST_NAME_REPLY_IN_QUEUE</strong>
+    </dt>
+    <dd>
+
+ Service could not become the primary owner and has been placed in the queue.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "REQUEST_NAME_REPLY_EXISTS"></a>
+    <strong>REQUEST_NAME_REPLY_EXISTS</strong>
+    </dt>
+    <dd>
+
+ Service is already in the queue.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "REQUEST_NAME_REPLY_ALREADY_OWNER"></a>
+    <strong>REQUEST_NAME_REPLY_ALREADY_OWNER</strong>
+    </dt>
+    <dd>
+
+ Service is already the primary owner.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RELEASE_NAME_REPLY_RELEASED"></a>
+    <strong>RELEASE_NAME_REPLY_RELEASED</strong>
+    </dt>
+    <dd>
+
+ Service was released from the given name.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RELEASE_NAME_REPLY_NON_EXISTENT"></a>
+    <strong>RELEASE_NAME_REPLY_NON_EXISTENT</strong>
+    </dt>
+    <dd>
+
+ The given name does not exist on the bus.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RELEASE_NAME_REPLY_NOT_OWNER"></a>
+    <strong>RELEASE_NAME_REPLY_NOT_OWNER</strong>
+    </dt>
+    <dd>
+
+ Service is not an owner of the given name.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "START_REPLY_SUCCESS"></a>
+    <strong>START_REPLY_SUCCESS</strong>
+    </dt>
+    <dd>
+
+ Service was auto started.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "START_REPLY_ALREADY_RUNNING"></a>
+    <strong>START_REPLY_ALREADY_RUNNING</strong>
+    </dt>
+    <dd>
+
+ Service was already running.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TIMEOUT_USE_DEFAULT"></a>
+    <strong>TIMEOUT_USE_DEFAULT</strong>
+    </dt>
+    <dd>
+
+ Use the default D-Bus timeout value for waiting for a reply.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TIMEOUT_INFINITE"></a>
+    <strong>TIMEOUT_INFINITE</strong>
+    </dt>
+    <dd>
+
+ Use an infinite timeout waiting for a reply.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BUS_SESSION"></a>
+    <strong>BUS_SESSION</strong>
+    </dt>
+    <dd>
+
+ The <em>SESSION</em> D-bus bus.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BUS_SYSTEM"></a>
+    <strong>BUS_SYSTEM</strong>
+    </dt>
+    <dd>
+
+ The <em>SYSTEM</em> D-bus bus.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BUS_STARTER"></a>
+    <strong>BUS_STARTER</strong>
+    </dt>
+    <dd>
+
+ The <em>STARTER</em> D-bus bus.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Message_Types"></a>Message Types</h2>
+    <dl class="function">
+    <dt>
+    <a name = "MESSAGE_TYPE_INVALID"></a>
+    <strong>MESSAGE_TYPE_INVALID</strong>
+    </dt>
+    <dd>
+
+ This value is never a valid message type.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "MESSAGE_TYPE_METHOD_CALL"></a>
+    <strong>MESSAGE_TYPE_METHOD_CALL</strong>
+    </dt>
+    <dd>
+
+ Message type of a method call message.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "MESSAGE_TYPE_METHOD_RETURN"></a>
+    <strong>MESSAGE_TYPE_METHOD_RETURN</strong>
+    </dt>
+    <dd>
+
+ Message type of a method return message.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "MESSAGE_TYPE_ERROR"></a>
+    <strong>MESSAGE_TYPE_ERROR</strong>
+    </dt>
+    <dd>
+
+ Message type of an error reply message.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "MESSAGE_TYPE_SIGNAL"></a>
+    <strong>MESSAGE_TYPE_SIGNAL</strong>
+    </dt>
+    <dd>
+
+ Message type of a signal message.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Message_Handler_Return_Values"></a>Message Handler Return Values</h2>
+    <dl class="function">
+    <dt>
+    <a name = "HANDLER_RESULT_HANDLED"></a>
+    <strong>HANDLER_RESULT_HANDLED</strong>
+    </dt>
+    <dd>
+
+ The result to return in a message callback when a message has been handled.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HANDLER_RESULT_NOT_YET_HANDLED"></a>
+    <strong>HANDLER_RESULT_NOT_YET_HANDLED</strong>
+    </dt>
+    <dd>
+
+ The result to return in a message callback when a message <strong>cannot</strong> be handled.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HANDLER_RESULT_NEED_MEMORY"></a>
+    <strong>HANDLER_RESULT_NEED_MEMORY</strong>
+    </dt>
+    <dd>
+
+ The result to return in a message callback when more memory is needed to process the message.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="D_Bus_Errors"></a>D-Bus Errors</h2>
+    <dl class="function">
+    <dt>
+    <a name = "ERROR_FAILED"></a>
+    <strong>ERROR_FAILED</strong>
+    </dt>
+    <dd>
+
+ A generic error; "something went wrong" - see the error message for more.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NO_MEMORY"></a>
+    <strong>ERROR_NO_MEMORY</strong>
+    </dt>
+    <dd>
+
+ There was not enough memory to complete an operation.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SERVICE_UNKNOWN"></a>
+    <strong>ERROR_SERVICE_UNKNOWN</strong>
+    </dt>
+    <dd>
+
+ The bus doesn't know how to launch a service to supply the bus name you wanted.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NAME_HAS_NO_OWNER"></a>
+    <strong>ERROR_NAME_HAS_NO_OWNER</strong>
+    </dt>
+    <dd>
+
+ The bus name you referenced doesn't exist.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NO_REPLY"></a>
+    <strong>ERROR_NO_REPLY</strong>
+    </dt>
+    <dd>
+
+ No reply to a message expecting one, usually means a timeout occurred.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_IO_ERROR"></a>
+    <strong>ERROR_IO_ERROR</strong>
+    </dt>
+    <dd>
+
+ Something went wrong reading or writing to a socket, for example.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_BAD_ADDRESS"></a>
+    <strong>ERROR_BAD_ADDRESS</strong>
+    </dt>
+    <dd>
+
+ A D-Bus bus address was malformed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NOT_SUPPORTED"></a>
+    <strong>ERROR_NOT_SUPPORTED</strong>
+    </dt>
+    <dd>
+
+ Requested operation isn't supported (like ENOSYS on UNIX).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_LIMITS_EXCEEDED"></a>
+    <strong>ERROR_LIMITS_EXCEEDED</strong>
+    </dt>
+    <dd>
+
+ Some limited resource is exhausted.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_ACCESS_DENIED"></a>
+    <strong>ERROR_ACCESS_DENIED</strong>
+    </dt>
+    <dd>
+
+ Security restrictions don't allow doing what you're trying to do.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_AUTH_FAILED"></a>
+    <strong>ERROR_AUTH_FAILED</strong>
+    </dt>
+    <dd>
+
+ Authentication didn't work.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NO_SERVER"></a>
+    <strong>ERROR_NO_SERVER</strong>
+    </dt>
+    <dd>
+
+ Unable to connect to server (probably caused by ECONNREFUSED on a socket).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_TIMEOUT"></a>
+    <strong>ERROR_TIMEOUT</strong>
+    </dt>
+    <dd>
+
+ Certain timeout errors, possibly ETIMEDOUT on a socket.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_NO_NETWORK"></a>
+    <strong>ERROR_NO_NETWORK</strong>
+    </dt>
+    <dd>
+
+ No network access (probably ENETUNREACH on a socket).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_ADDRESS_IN_USE"></a>
+    <strong>ERROR_ADDRESS_IN_USE</strong>
+    </dt>
+    <dd>
+
+ Can't bind a socket since its address is in use.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_DISCONNECTED"></a>
+    <strong>ERROR_DISCONNECTED</strong>
+    </dt>
+    <dd>
+
+ The connection is disconnected and you're trying to use it.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_INVALID_ARGS"></a>
+    <strong>ERROR_INVALID_ARGS</strong>
+    </dt>
+    <dd>
+
+ Invalid arguments passed to a method call.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_FILE_NOT_FOUND"></a>
+    <strong>ERROR_FILE_NOT_FOUND</strong>
+    </dt>
+    <dd>
+
+ Missing file.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_FILE_EXISTS"></a>
+    <strong>ERROR_FILE_EXISTS</strong>
+    </dt>
+    <dd>
+
+ Existing file and the operation you're using does not silently overwrite.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_UNKNOWN_METHOD"></a>
+    <strong>ERROR_UNKNOWN_METHOD</strong>
+    </dt>
+    <dd>
+
+ Method name you invoked isn't known by the object you invoked it on.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_UNKNOWN_OBJECT"></a>
+    <strong>ERROR_UNKNOWN_OBJECT</strong>
+    </dt>
+    <dd>
+
+ Object you invoked a method on isn't known.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_UNKNOWN_INTERFACE"></a>
+    <strong>ERROR_UNKNOWN_INTERFACE</strong>
+    </dt>
+    <dd>
+
+ Interface you invoked a method on isn't known by the object.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_UNKNOWN_PROPERTY"></a>
+    <strong>ERROR_UNKNOWN_PROPERTY</strong>
+    </dt>
+    <dd>
+
+ Property you tried to access isn't known by the object.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_PROPERTY_READ_ONLY"></a>
+    <strong>ERROR_PROPERTY_READ_ONLY</strong>
+    </dt>
+    <dd>
+
+ Property you tried to set is read-only.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_TIMED_OUT"></a>
+    <strong>ERROR_TIMED_OUT</strong>
+    </dt>
+    <dd>
+
+ Certain timeout errors.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_MATCH_RULE_NOT_FOUND"></a>
+    <strong>ERROR_MATCH_RULE_NOT_FOUND</strong>
+    </dt>
+    <dd>
+
+ Tried to remove or modify a match rule that didn't exist.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_MATCH_RULE_INVALID"></a>
+    <strong>ERROR_MATCH_RULE_INVALID</strong>
+    </dt>
+    <dd>
+
+ The match rule isn't syntactically valid.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_EXEC_FAILED"></a>
+    <strong>ERROR_SPAWN_EXEC_FAILED</strong>
+    </dt>
+    <dd>
+
+ While starting a new process, the exec() call failed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_FORK_FAILED"></a>
+    <strong>ERROR_SPAWN_FORK_FAILED</strong>
+    </dt>
+    <dd>
+
+ While starting a new process, the fork() call failed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_CHILD_EXITED"></a>
+    <strong>ERROR_SPAWN_CHILD_EXITED</strong>
+    </dt>
+    <dd>
+
+ While starting a new process, the child exited with a status code.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_CHILD_SIGNALED"></a>
+    <strong>ERROR_SPAWN_CHILD_SIGNALED</strong>
+    </dt>
+    <dd>
+
+ While starting a new process, the child exited on a signal.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_FAILED"></a>
+    <strong>ERROR_SPAWN_FAILED</strong>
+    </dt>
+    <dd>
+
+ While starting a new process, something went wrong.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_SETUP_FAILED"></a>
+    <strong>ERROR_SPAWN_SETUP_FAILED</strong>
+    </dt>
+    <dd>
+
+ We failed to setup the environment correctly.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_CONFIG_INVALID"></a>
+    <strong>ERROR_SPAWN_CONFIG_INVALID</strong>
+    </dt>
+    <dd>
+
+ We failed to setup the config parser correctly.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_SERVICE_INVALID"></a>
+    <strong>ERROR_SPAWN_SERVICE_INVALID</strong>
+    </dt>
+    <dd>
+
+ Bus name was not valid.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_SERVICE_NOT_FOUND"></a>
+    <strong>ERROR_SPAWN_SERVICE_NOT_FOUND</strong>
+    </dt>
+    <dd>
+
+ Service file not found in system-services directory.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_PERMISSIONS_INVALID"></a>
+    <strong>ERROR_SPAWN_PERMISSIONS_INVALID</strong>
+    </dt>
+    <dd>
+
+ Permissions are incorrect on the setuid helper.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_FILE_INVALID"></a>
+    <strong>ERROR_SPAWN_FILE_INVALID</strong>
+    </dt>
+    <dd>
+
+ Service file invalid (Name, User or Exec missing).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SPAWN_NO_MEMORY"></a>
+    <strong>ERROR_SPAWN_NO_MEMORY</strong>
+    </dt>
+    <dd>
+
+ Tried to get a UNIX process ID and it wasn't available.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_UNIX_PROCESS_ID_UNKNOWN"></a>
+    <strong>ERROR_UNIX_PROCESS_ID_UNKNOWN</strong>
+    </dt>
+    <dd>
+
+ Tried to get a UNIX process ID and it wasn't available.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_INVALID_SIGNATURE"></a>
+    <strong>ERROR_INVALID_SIGNATURE</strong>
+    </dt>
+    <dd>
+
+ A type signature is not valid.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_INVALID_FILE_CONTENT"></a>
+    <strong>ERROR_INVALID_FILE_CONTENT</strong>
+    </dt>
+    <dd>
+
+ A file contains invalid syntax or is otherwise broken.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN"></a>
+    <strong>ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN</strong>
+    </dt>
+    <dd>
+
+ Asked for SELinux security context and it wasn't available.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_ADT_AUDIT_DATA_UNKNOWN"></a>
+    <strong>ERROR_ADT_AUDIT_DATA_UNKNOWN</strong>
+    </dt>
+    <dd>
+
+ Asked for ADT audit data and it wasn't available.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_OBJECT_PATH_IN_USE"></a>
+    <strong>ERROR_OBJECT_PATH_IN_USE</strong>
+    </dt>
+    <dd>
+
+ There's already an object with the requested object path.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR_INCONSISTENT_MESSAGE"></a>
+    <strong>ERROR_INCONSISTENT_MESSAGE</strong>
+    </dt>
+    <dd>
+
+ The message meta data does not match the payload.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

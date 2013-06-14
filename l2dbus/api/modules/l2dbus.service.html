@@ -1,0 +1,821 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Service">Service</a></li>
+<li><a href="#ReplyContext">ReplyContext</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><strong>l2dbus.service</strong></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>l2dbus.service</code></h1>
+
+<p>Service Module.</p>
+<p> This module provides a higher-level abstraction over the low level
+ <a href="../namespaces/l2dbus.ServiceObject.html#">ServiceObject</a> class. This abstraction makes it
+ easier to implement a D-Bus service in Lua and is consequently the preferred
+ method for developing D-Bus services in Lua.
+ </p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(objPath, introspectable, defaultHandler)</a></td>
+	<td class="summary">Constructs a new Service instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#convertXmlToIntfMeta">convertXmlToIntfMeta&nbsp;(intfName, xmlStr)</a></td>
+	<td class="summary">Converts a D-Bus XML description of an interface to a Lua equivalent.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DbusInterfaceMetadata">DbusInterfaceMetadata</a></td>
+	<td class="summary">The Lua Table Representation of a D-Bus Interface Description.</td>
+	</tr>
+</table>
+<h2><a href="#Service">Service</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#attach">attach&nbsp;(conn)</a></td>
+	<td class="summary">Attaches a D-Bus service with associated object path to the connection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#detach">detach&nbsp;(svc, conn)</a></td>
+	<td class="summary">Detach a D-Bus service with associated object path from the connection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addInterface">addInterface&nbsp;(svc, name, metadata)</a></td>
+	<td class="summary">Adds an interface to the D-Bus service.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeInterface">removeInterface&nbsp;(svc, name)</a></td>
+	<td class="summary">Removes an interface from the D-Bus service.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#registerMethodHandler">registerMethodHandler&nbsp;(svc, intfName, methodName, handler)</a></td>
+	<td class="summary">Registers a handler for a D-Bus interface/method combination.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unregisterMethodHandler">unregisterMethodHandler&nbsp;(svc, intfName, methodName)</a></td>
+	<td class="summary">Unregisters a handler for D-Bus interface/method handler combination.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#emit">emit&nbsp;(svc, conn, intfName, signalName, ...)</a></td>
+	<td class="summary">Provides a method to emit a signal on a specific connection.</td>
+	</tr>
+</table>
+<h2><a href="#ReplyContext">ReplyContext</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#getConnection">getConnection&nbsp;(ctx)</a></td>
+	<td class="summary">Returns the D-Bus connection associated with the context.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMessage">getMessage&nbsp;(ctx)</a></td>
+	<td class="summary">Returns the request message associated with the context.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#needsReply">needsReply&nbsp;(ctx)</a></td>
+	<td class="summary">Returns an indication of whether the request expects a reply message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reply">reply&nbsp;(ctx, ...)</a></td>
+	<td class="summary">Returns a response to the associated method request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#error">error&nbsp;(ctx, errName, errMsg)</a></td>
+	<td class="summary">Returns an error response to the associated method request.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(objPath, introspectable, defaultHandler)</strong>
+    </dt>
+    <dd>
+    Constructs a new Service instance. </p>
+
+<p> The constructor creates a Service instance. One or more D-Bus interfaces
+ can be associated with Service.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">objPath</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus object path this service is implementing.
+ It must be a valid path.</li>
+      <li><span class="parameter">introspectable</span>
+        <span class="types"><span class="type">bool</span></span>
+       If set to <strong>true</strong> this service will support
+ D-Bus introspection by implementing
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-introspectable">
+ org.freedesktop.DBus.Introspectable</a> on behalf of the service. If
+ <strong>false</strong> then the resulting service <strong>cannot</strong> be introspected.</li>
+      <li><span class="parameter">defaultHandler</span>
+        <span class="types"><span class="type">func</span></span>
+       The default (global) handler for this object.
+ This is called if none of the associated interface handlers can process
+ a request. It is the request handler of <em>last resort</em>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        A Service instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "convertXmlToIntfMeta"></a>
+    <strong>convertXmlToIntfMeta&nbsp;(intfName, xmlStr)</strong>
+    </dt>
+    <dd>
+    Converts a D-Bus XML description of an interface to a Lua equivalent. </p>
+
+<p> This function takes a D-Bus XML introspection description of an interface
+ and converts it to a Lua table representation that can be used to register
+ the interface with a D-Bus service. If the D-Bus XML description lists
+ multiple interfaces then <strong>only</strong> the interface with the specified
+ name will be decoded into an equivalent Lua table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">intfName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name to be converted. The
+ name should be defined in the XML description.</li>
+      <li><span class="parameter">xmlStr</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus introspection XML for the interface.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a> or <span class="type">nil</span></span>
+         A Lua table representation of the D-Bus XML interface
+ description. Returns <strong>nil</strong> if the XML could not be converted or
+ the interface name was not found.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Tables"></a>Tables</h2>
+    <dl class="function">
+    <dt>
+    <a name = "DbusInterfaceMetadata"></a>
+    <strong>DbusInterfaceMetadata</strong>
+    </dt>
+    <dd>
+    The Lua Table Representation of a D-Bus Interface Description.
+ </p>
+ The metadata describing a D-Bus interface can be specified using
+ one of two different formats. This first form is the direct D-Bus XML
+ introspection <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#introspection-format">description</a>.
+ The other format describes the D-Bus interface using a Lua table.
+ Internally, the XML format is always transformed into the more efficiently
+ manipulated Lua table-based representation described here.
+ </p>
+ An example Lua table representation of a D-Bus interface is shown below:</p>
+
+<pre><code>    {
+        interface = "org.example.Interface",
+        properties = {                  -- Array of properties
+            {                           -- IntrospectProp[1] (Prop1)
+                name = "Prop1",
+                sig = "s",
+                access = "rw"
+            },
+            ...                         -- IntrospectProp[N] (PropN)
+        },
+        signals = {                     -- Array of signals
+            {                           -- IntrospectItem[1] (Signal1)
+                name = "Signal1",
+                args = {                -- Signal1 arguments
+                    {                   -- IntrospectArg[1]
+                        sig = "s",
+                        name = "arg1",
+                    },
+                    ...                 -- IntrospectArg[N]
+                }
+            },
+            ...                         -- IntrospectItem[N] (SignalN)
+        },
+        methods = {                     -- Array of methods
+            {                           -- IntrospectItem[1] (Method1)
+                name = "Method1",
+                args = {                -- Method1 arguments
+                    {                   -- IntrospectArg[1]
+                        sig = "s",
+                        name = "arg1",
+                        dir = "in"
+                    },
+                    ...                 -- IntrospectArg[N]
+                }
+            },
+            ...                         -- IntrospectItem[N] (MethodN)
+        }
+    }
+</code></pre>
+
+<p> The key fields for the Lua table include:
+ </p>
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">interface</span>
+       The valid D-Bus interface name</li>
+      <li><span class="parameter">methods</span>
+       An array of methods of type <a href="../namespaces/l2dbus.Interface.html#IntrospectItem">IntrospectItem</a></li>
+      <li><span class="parameter">signals</span>
+       An array of signals of type <a href="../namespaces/l2dbus.Interface.html#IntrospectItem">IntrospectItem</a></li>
+      <li><span class="parameter">properties</span>
+       An array of properties of type <a href="../namespaces/l2dbus.Interface.html#IntrospectProp">IntrospectProp</a></li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Service"></a>Service</h2>
+    <dl class="function">
+    <dt>
+    <a name = "attach"></a>
+    <strong>attach&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+    Attaches a D-Bus service with associated object path to the connection. </p>
+
+<p> This method is used to attach and register the service's object path
+ with the D-Bus connection. Once attached the service can receive
+ messages sent to its object path.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the service is attached and <strong>false</strong>
+ otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "detach"></a>
+    <strong>detach&nbsp;(svc, conn)</strong>
+    </dt>
+    <dd>
+    Detach a D-Bus service with associated object path from the connection. </p>
+
+<p> This method is used to detach and unregister the service's object path
+ from the D-Bus connection. Once detached the service will no longer receive
+ messages sent to its object path.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the service is detached and <strong>false</strong>
+ otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "addInterface"></a>
+    <strong>addInterface&nbsp;(svc, name, metadata)</strong>
+    </dt>
+    <dd>
+    Adds an interface to the D-Bus service. </p>
+
+<p> This method is used to add the interface described by the provided
+ metadata to the service. If this service is introspectable then the
+ interface will appear to be implemented by the service with the associated
+ object path. The metadata can be in one of two formats: D-Bus
+ introspection XML or a Lua table equivalent. The function
+ <a href="../modules/l2dbus.service.html#convertXmlToIntfMeta">convertXmlToIntfMeta</a> can be used to convert XML to the Lua equivalent
+ but is typically unnecessary for this method.
+ </br>
+ If the interface that is being added contains D-Bus properties then
+ the D-Bus property interface <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">
+ org.freedesktop.DBus.Properties</a> will automatically be added to this
+ service. It is required that handlers for the <strong>Get</strong>, <strong>Set</strong>, and
+ <strong>GetAll</strong> methods will be registered to handle inquires on the object
+ properties.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus name of the interface being added to the
+ service. It must be a valid D-Bus interface name.</li>
+      <li><span class="parameter">metadata</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The meta-data description of the D-Bus
+ interface. This can either be the D-Bus XML introspection description or
+ the equivalent Lua table <a href="../modules/l2dbus.service.html#DbusInterfaceMetadata">representation</a>. If the
+ D-Bus XML description lists multiple interfaces then <strong>only</strong> the interface
+ with the specified name will be decoded into an equivalent Lua table
+ representation.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the interface is added successfully and
+ <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "removeInterface"></a>
+    <strong>removeInterface&nbsp;(svc, name)</strong>
+    </dt>
+    <dd>
+    Removes an interface from the D-Bus service. </p>
+
+<p> This method removes the named D-Bus interface from the service. Handlers
+ for this interface will no longer be called.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name to remove.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the interface is removed and <strong>false</strong>
+ otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "registerMethodHandler"></a>
+    <strong>registerMethodHandler&nbsp;(svc, intfName, methodName, handler)</strong>
+    </dt>
+    <dd>
+    Registers a handler for a D-Bus interface/method combination. </p>
+
+<p> This method registers a handler that will be called when a service
+ request directed to a given object path/interface/method combination is
+ received.
+ </br>
+ The signature of the handler function will be of the form:</p>
+
+<pre><code>    function onRequest(ctx, arg1, arg2, ..., argN)
+</code></pre>
+
+<p> Where the first argument of the handler will <strong>always</strong> be a context
+ instance that can used to reply either immediately or at some point
+ int the  future (outside the scope of the handler if a reference to
+ the context is maintained). A Lua error may be thrown if an error is
+ encountered registering a handler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">intfName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name to associate the handler.</li>
+      <li><span class="parameter">methodName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus method name assocated with the handler.</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span></span>
+       The handler function which will receive the message. If
+ a handler for this interface/method combination was already specified then
+ it will be replaced by this handler.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unregisterMethodHandler"></a>
+    <strong>unregisterMethodHandler&nbsp;(svc, intfName, methodName)</strong>
+    </dt>
+    <dd>
+    Unregisters a handler for D-Bus interface/method handler combination. </p>
+
+<p> This method disassociates the method handler from the method so that
+ it will no longer be called when a matching method request is received
+ by the service. If the D-Bus interface name is unknown a Lua error
+ will be thrown.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">intfName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name owning the method.</li>
+      <li><span class="parameter">methodName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The name of the D-Bus method to unregister
+ the handler.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the handler is removed and <strong>false</strong>
+ otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "emit"></a>
+    <strong>emit&nbsp;(svc, conn, intfName, signalName, ...)</strong>
+    </dt>
+    <dd>
+    Provides a method to emit a signal on a specific connection. </p>
+
+<p> This method provides a means to send a D-Bus signal with the given
+ interface name and signal name over the provided connection. Since a
+ service can exist on more than one connection (or D-Bus bus) the
+ actual connection on which the signal should be sent needs to be
+ specified explicitly. Connections <em>host</em> services and not vice-versa.
+ This method can throw Lua errors if the parameters are invalid or problems
+ occur encoding parameters or sending the signal.
+ </br>
+ <strong>Note:</strong> The interface specified by this method must be implemented
+ by this service. It is an error if the interface is unknown (e.g. an
+ arbitrary interface name cannot be specified). Also, signals are only
+ queued to be sent and are not immediately delivered. Call the
+ <a href="../namespaces/l2dbus.Connection.html#flush">flush</a> method on the connection to block until the
+ message has been sent.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection on which to emit the signal.</li>
+      <li><span class="parameter">intfName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus interface name owning the signal.</li>
+      <li><span class="parameter">signalName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The name of the D-Bus signal.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">any</span></span>
+       The list of arguments associated with the signal being
+ sent. The signature of the signal (as specified in the D-Bus interface
+ description) is used to map the Lua types to their underlying D-Bus types.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the signal is enqueued to be sent and
+ <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        Returns the serial number of the enqueued signal or
+ zero (0) if it cannot be queued.</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="ReplyContext"></a>ReplyContext</h2>
+    <dl class="function">
+    <dt>
+    <a name = "getConnection"></a>
+    <strong>getConnection&nbsp;(ctx)</strong>
+    </dt>
+    <dd>
+    Returns the D-Bus connection associated with the context. </p>
+
+<p> Returns the D-Bus connection on which the original request message
+ arrived. This will be the connection on which the response is sent.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctx</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The reply context.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        The D-Bus connection associated with the context.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMessage"></a>
+    <strong>getMessage&nbsp;(ctx)</strong>
+    </dt>
+    <dd>
+    Returns the request message associated with the context. </p>
+
+<p> Returns the original D-Bus request message for which there should
+ be a reply.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctx</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The reply context.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        The D-Bus request message associated with the context.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "needsReply"></a>
+    <strong>needsReply&nbsp;(ctx)</strong>
+    </dt>
+    <dd>
+    Returns an indication of whether the request expects a reply message. </p>
+
+<p> The method returns a boolean value indicating whether or not the
+ original request expects a reply (or not). If no reply is needed/expected
+ then message traffic can be reduced by not sending a reply. Typically
+ most requests expect a reply. Technically, even if a reply is not needed
+ it is not an error to send one anyway. The client will likely ignore the
+ reply.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctx</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The reply context.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the request expects a reply, <strong>false</strong>
+ if a reply is <strong>not</strong> needed.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "reply"></a>
+    <strong>reply&nbsp;(ctx, ...)</strong>
+    </dt>
+    <dd>
+    Returns a response to the associated method request. </p>
+
+<p> The method queues the response to a request associated with the context.
+ The parameters are marshalled into a response message which is then
+ enqueued into the out-going message queue. If it's critical that the
+ response is delivered immediately (rather than during the next iteration
+ of the dispatch loop) call the <a href="../namespaces/l2dbus.Connection.html#flush">flush</a> method on
+ the connection to block until the response message has been sent. It is
+ considered an error to respond to the same request more than once. An
+ <a href="../modules/l2dbus.service.html#error">error</a> reply is considered a response as well.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctx</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The reply context.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">any</span></span>
+       The list of arguments associated with the response. The
+ signature of these arguments is taken from the D-Bus interface specification
+ for the return (out) parameters. This signature is used to guide the
+ conversion from Lua types to D-Bus types.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the response is enqueued to be sent and
+ <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        Returns the serial number of the enqueued response message
+ or zero (0) if it cannot be queued.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "error"></a>
+    <strong>error&nbsp;(ctx, errName, errMsg)</strong>
+    </dt>
+    <dd>
+    Returns an error response to the associated method request. </p>
+
+<p> The method queues an error response to the request associated with the
+ context. The error is enqueued into the out-going message queue. If it's
+ critical that the D-Bus error is delivered immediately (rather than during
+ the next iteration of the dispatch loop) call the
+ <a href="../namespaces/l2dbus.Connection.html#flush">flush</a> method on the connection to block until the
+ response message has been sent. An
+ <a href="../modules/l2dbus.service.html#error">error</a> reply is considered a valid
+ response to a request and fullfills the request. An additional response is
+ unnecessary.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">ctx</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The reply context.</li>
+      <li><span class="parameter">errName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus error name.</li>
+      <li><span class="parameter">errMsg</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       An optional error message.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the error is enqueued to be sent and
+ <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        Returns the serial number of the enqueued error message
+ or zero (0) if it cannot be queued.</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

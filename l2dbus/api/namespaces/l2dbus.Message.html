@@ -1,0 +1,1966 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Message_Types">Message Types</a></li>
+<li><a href="#l_dbus_Message">l2dbus.Message</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><strong>l2dbus.Message</strong></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Message</code></h1>
+
+<p>L2DBUS Message</p>
+<p> This section describes the Message class which is used to encapsulate D-Bus
+ messages in Lua.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(msgType)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#newMethodCall">newMethodCall&nbsp;(destination, path, interface, member)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#newMethodReturn">newMethodReturn&nbsp;(callMsg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#newSignal">newSignal&nbsp;(path, interface, name)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#newError">newError&nbsp;(callMsg, errName, errMsg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#copy">copy&nbsp;(origMsg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#msgTypeToString">msgTypeToString&nbsp;(msgType)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unmarshallToMessage">unmarshallToMessage&nbsp;(msgBuf)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#validateSignature">validateSignature&nbsp;(signature)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#MethodCallInitializer">MethodCallInitializer</a></td>
+	<td class="summary">A D-Bus method call message "initializer" table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SignalInitializer">SignalInitializer</a></td>
+	<td class="summary">A D-Bus signal message "initializer" table.</td>
+	</tr>
+</table>
+<h2><a href="#Message_Types">Message Types</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#INVALID">INVALID</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#METHOD_CALL">METHOD_CALL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#METHOD_RETURN">METHOD_RETURN</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR">ERROR</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SIGNAL">SIGNAL</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#l_dbus_Message">l2dbus.Message</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#getType">getType&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setNoReply">setNoReply&nbsp;(msg, flag)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getNoReply">getNoReply&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setAutoStart">setAutoStart&nbsp;(msg, flag)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getAutoStart">getAutoStart&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setObjectPath">setObjectPath&nbsp;(msg, path)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getObjectPath">getObjectPath&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasObjectPath">hasObjectPath&nbsp;(msg, path)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getDecomposedObjectPath">getDecomposedObjectPath&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setInterface">setInterface&nbsp;(msg, interface)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getInterface">getInterface&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasInterface">hasInterface&nbsp;(msg, interface)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setMember">setMember&nbsp;(msg, name)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMember">getMember&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasMember">hasMember&nbsp;(msg, member)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setErrorName">setErrorName&nbsp;(msg, name)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getErrorName">getErrorName&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setDestination">setDestination&nbsp;(msg, name)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getDestination">getDestination&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasDestination">hasDestination&nbsp;(msg, destination)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setSender">setSender&nbsp;(msg, name)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getSender">getSender&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasSender">hasSender&nbsp;(msg, sender)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getSignature">getSignature&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasSignature">hasSignature&nbsp;(msg, signature)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#containsUnixFds">containsUnixFds&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setSerial">setSerial&nbsp;(msg, serialNum)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getSerial">getSerial&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addArgs">addArgs&nbsp;(msg, ...)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addArgsBySignature">addArgsBySignature&nbsp;(msg, signature, ...)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getArgs">getArgs&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getArgsAsArray">getArgsAsArray&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#marshallToArray">marshallToArray&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dispose">dispose&nbsp;(msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(msgType)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus Message of the specified type.</p>
+
+<p> Constructs one of the following types of new D-Bus messages:
+ <ul>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a> or <a href="../namespaces/l2dbus.Message.html#METHOD_CALL">METHOD_CALL</a></li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a> or <a href="../namespaces/l2dbus.Message.html#METHOD_RETURN">METHOD_RETURN</a></li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a> or <a href="../namespaces/l2dbus.Message.html#SIGNAL">SIGNAL</a></li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a> or <a href="../namespaces/l2dbus.Message.html#ERROR">ERROR</a></li>
+ </ul>
+ The constructed message is initially empty (e.g. there are no arguments or
+ parameters assigned to it).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msgType</span>
+        <span class="types"><span class="type">number</span></span>
+       One of the defined D-Bus message types:
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>, or
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a></li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "newMethodCall"></a>
+    <strong>newMethodCall&nbsp;(destination, path, interface, member)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus method call Message.</p>
+
+<p> Constructs a D-Bus method call message either using an initialization
+ <a href="../namespaces/l2dbus.Message.html#MethodCallInitializer">table</a> or a parameter list. The <em>destination</em> may
+ be <strong>nil</strong> in which no destination is set which is appropriate when
+ using D-Bus in a peer-to-peer context (e.g. no message bus). The
+ <em>interface</em> may be <strong>nil</strong> which means it remains undefined which
+ object receives the message if more than one interface defines the
+ same member name.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">destination</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The bus name that the message should be
+ sent to <strong>or</strong> a <a href="../namespaces/l2dbus.Message.html#MethodCallInitializer">MethodCallInitializer</a> table containing all the method
+ call parameters. If a table is specified then the parameters following the
+ table are ignored. The destination is a optional parameter and may be set
+ to <strong>nil</strong>.</li>
+      <li><span class="parameter">path</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus object path the message should be sent to.
+ Ignored if the first parameter is a table.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The interface to invoke the method on. Ignored
+ if the first parameter is a table. The interface is optional and may be set
+ to <strong>nil</strong>.</li>
+      <li><span class="parameter">member</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The member name to call.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object for a message call.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "newMethodReturn"></a>
+    <strong>newMethodReturn&nbsp;(callMsg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus method return Message.</p>
+
+<p> Constructs a D-Bus method return message based on a method call message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">callMsg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus call message on which to
+ form the D-Bus return message.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object for a return message.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "newSignal"></a>
+    <strong>newSignal&nbsp;(path, interface, name)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus signal message.</p>
+
+<p> Constructs a D-Bus signal message either using an initializer <a href="../namespaces/l2dbus.Message.html#SignalInitializer">table</a>
+ or parameter list.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">path</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The path to the object emitting the signal<strong>or</strong> a
+ <a href="../namespaces/l2dbus.Message.html#SignalInitializer">SignalInitializer</a> table containing all the signal parameters. If
+ a table is specified then the parameters following the table are ignored.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The interface the signal is emitted from.
+ Ignored if the first parameter is a table.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The signal name. Ignored if the first parameter is a
+ table.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object for a signal.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "newError"></a>
+    <strong>newError&nbsp;(callMsg, errName, errMsg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus error message based on a request message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">callMsg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus call message on which to
+ base the D-Bus error message.</li>
+      <li><span class="parameter">errName</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The error name for the message. It must be
+ a valid name according to the syntax given in the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.</li>
+      <li><span class="parameter">errMsg</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The error message or <strong>nil</strong> if
+ there is not one.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object for a error message.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "copy"></a>
+    <strong>copy&nbsp;(origMsg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new D-Bus message based on an existing instance.</p>
+
+<p> Creates a new message that is an exact replica of the message specified
+ except that its serial number is reset to 0 and if the original
+ message was "locked" (in the outgoing message queue and thus not
+ modifiable) the new message will be unlocked.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">origMsg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The original D-Bus message to copy.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Message userdata object for the new copy.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "msgTypeToString"></a>
+    <strong>msgTypeToString&nbsp;(msgType)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Converts the D-Bus message type into a machine-readable string.</p>
+
+<p> <ul>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a> -> "method_call"</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a> -> "method_return"</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a> -> "signal"</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a> -> "error"</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_INVALID">MESSAGE_TYPE_INVALID</a> -> "invalid"</li>
+ </ul>
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msgType</span>
+        <span class="types"><span class="type">number</span></span>
+       The D-Bus message type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The machine-readable message type string.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unmarshallToMessage"></a>
+    <strong>unmarshallToMessage&nbsp;(msgBuf)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Unmarshalls a binary array into a D-Bus message.</p>
+
+<p> This method takes an array of numbers representing the binary
+ representation of a D-Bus message and turns it into a new message. This
+ is the opposite operation performed by <a href="../namespaces/l2dbus.Message.html#marshallToArray">marshallToArray</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msgBuf</span>
+        <span class="types"><span class="type">array</span></span>
+       Array of numbers containing the binary representation of
+ the message.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        userdata A D-Bus message created from the binary representation.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "validateSignature"></a>
+    <strong>validateSignature&nbsp;(signature)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Check a type signature for validity.</p>
+
+<p> This function checks the validity of the type signature against the D-Bus
+ specification.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">signature</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The signature to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the signature is valid, <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        An error message if there signature is invalid, <strong>nil</strong> otherwise.</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Tables"></a>Tables</h2>
+    <dl class="function">
+    <dt>
+    <a name = "MethodCallInitializer"></a>
+    <strong>MethodCallInitializer</strong>
+    </dt>
+    <dd>
+    A D-Bus method call message "initializer" table. </p>
+
+<p> This table can be used in lieu of a parameter list to initialize a new
+ D-Bus method call message.
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">method</span>
+       (string) [Req] The method name to call.</li>
+      <li><span class="parameter">interface</span>
+       (string) [Opt] The interface to invoke the method on.</li>
+      <li><span class="parameter">path</span>
+       (string) [Req] The D-Bus object path the message should be sent to.</li>
+      <li><span class="parameter">destination</span>
+       (string) [Opt] The bus name that the message should be sent to.</li>
+    </ul>
+
+
+
+    <h3>see also:</h3>
+    <ul>
+         <a href="../namespaces/l2dbus.Message.html#newMethodCall">newMethodCall</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "SignalInitializer"></a>
+    <strong>SignalInitializer</strong>
+    </dt>
+    <dd>
+    A D-Bus signal message "initializer" table. </p>
+
+<p> This table can be used in lieu of a parameter list to initialize a new
+ D-Bus signal message.
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+       (string) [Req] The name of the signal.</li>
+      <li><span class="parameter">interface</span>
+       (string) [Req] The interface the signal is emitted from.</li>
+      <li><span class="parameter">path</span>
+       (string) [Req] The path to the object emitting the signal.</li>
+    </ul>
+
+
+
+    <h3>see also:</h3>
+    <ul>
+         <a href="../namespaces/l2dbus.Message.html#newSignal">newSignal</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2><a name="Message_Types"></a>Message Types</h2>
+    <dl class="function">
+    <dt>
+    <a name = "INVALID"></a>
+    <strong>INVALID</strong>
+    </dt>
+    <dd>
+
+ This value is never a valid message type.
+ Equivalent to <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_INVALID">l2dbus.Dbus.MESSAGE_TYPE_INVALID</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "METHOD_CALL"></a>
+    <strong>METHOD_CALL</strong>
+    </dt>
+    <dd>
+
+ Message type of a method call.
+ Equivalent to <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">l2dbus.Dbus.MESSAGE_TYPE_METHOD_CALL</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "METHOD_RETURN"></a>
+    <strong>METHOD_RETURN</strong>
+    </dt>
+    <dd>
+
+ Message type of a method return.
+ Equivalent to <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">l2dbus.Dbus.MESSAGE_TYPE_METHOD_RETURN</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR"></a>
+    <strong>ERROR</strong>
+    </dt>
+    <dd>
+
+ Message type of an error.
+ Equivalent to <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">l2dbus.Dbus.MESSAGE_TYPE_ERROR</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SIGNAL"></a>
+    <strong>SIGNAL</strong>
+    </dt>
+    <dd>
+
+ Message type of a signal.
+ Equivalent to <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">l2dbus.Dbus.MESSAGE_TYPE_SIGNAL</a>.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="l_dbus_Message"></a>l2dbus.Message</h2>
+    <dl class="function">
+    <dt>
+    <a name = "getType"></a>
+    <strong>getType&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the type of the message.</p>
+
+<p> The valid types include <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>, and
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a>. Other types are
+ allowed and all code must silently ignore messages of unknown type. The
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_INVALID">MESSAGE_TYPE_INVALID</a> type will <strong>never</strong>
+ be returned.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the type.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        The D-Bus message type constant.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setNoReply"></a>
+    <strong>setNoReply&nbsp;(msg, flag)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets flag indicating the message does not want a reply.</p>
+
+<p> This method sets a flag in the message that indicates that it does not
+ want a reply. If this flag is set the other end of the connection
+ <em>may</em> (e.g. is not required to) optimize by not sending method return
+ or error replies.</p>
+
+<p> If this flag is set then there is no way to know if the message
+ successfully arrived at the remote end. The reply message is used
+ to indicate a message has been received. By default a new message
+ has this flag set to <strong>false</strong> so the far-end is required to reply.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the flag.</li>
+      <li><span class="parameter">flag</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> to indicate not reply is
+ necessary. Set to <strong>false</strong> to indicate a reply is needed.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getNoReply"></a>
+    <strong>getNoReply&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Determines if a reply message is needed.</p>
+
+<p> Returns <strong>true</strong> if the message does not expect a reply.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the flag status.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the message does not expect a
+ reply or <strong>false</strong> if a reply is expected.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setAutoStart"></a>
+    <strong>setAutoStart&nbsp;(msg, flag)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets flag indicating that the owner for the destination name will be
+ automatically started before the message is delivered.</p>
+
+<p> When this flag is set the message is held until a name owner finishes
+ starting up or fails. If it fails then the reply will be an error
+ message. By default new messages have this set to <strong>true</strong> so that
+ auto-starting is the default.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message on which the flag will be set.</li>
+      <li><span class="parameter">flag</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> to indicate auto-start is enabled
+ or <strong>false</strong> otherwise.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getAutoStart"></a>
+    <strong>getAutoStart&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns <strong>true</strong> if the provided message will cause the recipient of
+ the message (e.g. the destination name) to be auto-started. Otherwise
+ <strong>false</strong> is returned and the destination is not auto-started.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message on which to retrieve the flag.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> to indicate auto-start is enabled
+ or <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setObjectPath"></a>
+    <strong>setObjectPath&nbsp;(msg, path)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the object path the message is being sent to (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ one the signal is being emitted from (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>)</p>
+
+<p> The path must be a valid D-Bus object path.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the path.</li>
+      <li><span class="parameter">path</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The path to set. Can be <strong>nil</strong> to unset the path.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getObjectPath"></a>
+    <strong>getObjectPath&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the object path this message is being sent to (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ path the signal is being emitted from (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>)</p>
+
+<p> The path must be a valid D-Bus object path.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the path.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The path or <strong>nil</strong> if it's not set.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasObjectPath"></a>
+    <strong>hasObjectPath&nbsp;(msg, path)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has the specified object path.</p>
+
+<p> The provided path must be a valid D-Bus object path.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to check the object path.</li>
+      <li><span class="parameter">path</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The object path to compare.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the paths match, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getDecomposedObjectPath"></a>
+    <strong>getDecomposedObjectPath&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the decomposed object path this message is being sent to (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ decomposed path the signal is being emitted from (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>).</p>
+
+<p> The decomposed form is defined as one array element per path component. An
+ empty but non-NULL path means the "/" path. So the path "/foo/bar" becomes
+ <em>{"foo", "bar"}</em> and the path "/" becomes an empty table <em>{}</em>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the path.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A Lua table/array containing the decomposed path as elements
+ of the array.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setInterface"></a>
+    <strong>setInterface&nbsp;(msg, interface)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the interface this message is being sent to (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ interface the signal is being emitted from (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>).</p>
+
+<p> The interface name must contain only valid characters from the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the interface.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The D-Bus interface name or <strong>nil</strong> if the
+ interface is to be unset.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getInterface"></a>
+    <strong>getInterface&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the interface this message is being sent to (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ interface the signal is being emitted from (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the interface.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The D-Bus interface name or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasInterface"></a>
+    <strong>hasInterface&nbsp;(msg, interface)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has a matching interface.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to compare with the interface.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The interface name.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the interface field in the message
+ header matches, <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setMember"></a>
+    <strong>setMember&nbsp;(msg, name)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the interface member this being invoked (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or the
+ member name for the signal being emitted (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>).</p>
+
+<p> The member name must contain only valid characters from the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the member name.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The D-Bus member name or <strong>nil</strong> if the
+ name is to be unset.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMember"></a>
+    <strong>getMember&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the interface member being invoked (for a
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>) or emitted
+ (for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_SIGNAL">MESSAGE_TYPE_SIGNAL</a>).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the member name.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The D-Bus member name or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasMember"></a>
+    <strong>hasMember&nbsp;(msg, member)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has a matching interface member.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to compare with the interface member.</li>
+      <li><span class="parameter">member</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The member name to compare.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the member field in the message
+ header matches, <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setErrorName"></a>
+    <strong>setErrorName&nbsp;(msg, name)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the name of the error message.</p>
+
+<p> The error name must be fully qualified according the the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus error message to set the name.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The error name or <strong>nil</strong> to unset this field.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getErrorName"></a>
+    <strong>getErrorName&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the error name for messages of type
+ <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_ERROR">MESSAGE_TYPE_ERROR</a>).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus error message to get the error name.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The D-Bus error name or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setDestination"></a>
+    <strong>setDestination&nbsp;(msg, name)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the message's destination.</p>
+
+<p> The destination is the name of another connection on the bus and
+ may specify either the <em>well-known</em> name or the <em>unique</em> name assigned
+ by the bus. The destination name must be fully qualified according the the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the destination.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The destination or <strong>nil</strong> to unset this field.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getDestination"></a>
+    <strong>getDestination&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the destination of a message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the destination.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The D-Bus destination or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasDestination"></a>
+    <strong>hasDestination&nbsp;(msg, destination)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has a matching destination.</p>
+
+<p> If the message has no destination specified or has a different destination
+ then <strong>false</strong> is returned, otherwise <strong>true</strong>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to compare with the destination.</li>
+      <li><span class="parameter">destination</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The destination to compare.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the destination in the message
+ header matches, <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setSender"></a>
+    <strong>setSender&nbsp;(msg, name)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the message sender.</p>
+
+<p> The sender name must be fully qualified according the the D-Bus
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">specification</a>.</p>
+
+<p> <strong>Note:</strong> You usually don't want to call this method unless you're implementing
+ a message bus daemon since that is typically one function of the daemon.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set sender.</li>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+       The sender or <strong>nil</strong> to unset this field.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getSender"></a>
+    <strong>getSender&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the unique name of the connection which originated this
+ message or <strong>nil</strong> if unknown or inapplicable.</p>
+
+<p> The sender is typically filled in by the message bus. The sender will
+ always be the <em>unique</em> bus name and <strong>not</strong> one of the (potentially
+ multiple) <em>well-known</em> names a connection may own.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the sender.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The unique D-Bus sender or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasSender"></a>
+    <strong>hasSender&nbsp;(msg, sender)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has the given unique name as its sender.</p>
+
+<p> If the message has no sender specified or has a different sender then
+ <strong>false</strong> is returned. Messages from the message bus itself will have
+ <a href="../namespaces/l2dbus.Dbus.html#SERVICE_DBUS">SERVICE_DBUS</a> as the sender.</p>
+
+<p> <strong>Note:</strong> A peer application will always have the unique name of the
+ connection as the sender and <strong>not</strong> the a sender's <em>well-known</em> name.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to compare with the sender name.</li>
+      <li><span class="parameter">sender</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The sender name to compare.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the sender in the message
+ header matches, <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getSignature"></a>
+    <strong>getSignature&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the type signature of the message.</p>
+
+<p> The type signature are the arguments in the message payload. The payload
+ only includes the <em>in</em> arguments for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_CALL">MESSAGE_TYPE_METHOD_CALL</a>
+ messages and only <em>out</em> arguments for <a href="../namespaces/l2dbus.Dbus.html#MESSAGE_TYPE_METHOD_RETURN">MESSAGE_TYPE_METHOD_RETURN</a>
+ messages. Therefore the result is <strong>not</strong> the complete signature of the entire C++ style method.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the signature.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        The D-Bus signature in terms of type codes or <strong>nil</strong> if unset.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasSignature"></a>
+    <strong>hasSignature&nbsp;(msg, signature)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message has the given signature.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to compare with the signature.</li>
+      <li><span class="parameter">signature</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The signature to compare.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the signature matches, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "containsUnixFds"></a>
+    <strong>containsUnixFds&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks to see if the message contains Unix file descriptors (fds).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to check for Unix file descriptors.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the message contains Unix file descriptors,
+ <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setSerial"></a>
+    <strong>setSerial&nbsp;(msg, serialNum)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the message serial number.</p>
+
+<p> The serial number can only be done <strong>once</strong> for a message.</p>
+
+<p> <strong>Note:</strong> The underlying <a href="../namespaces/l2dbus.Connection.html#">Connection</a> will automatically
+ set the serial to an appropriate value when it is enqueued to be sent. This
+ function typically only needs to be used in situations where the message is
+ being encapsulated in another protocol or it's being sent via a mechanism
+ outside of the standard <a href="../namespaces/l2dbus.Connection.html#">Connection</a> methods.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to set the serial number.</li>
+      <li><span class="parameter">serialNum</span>
+        <span class="types"><span class="type">number</span></span>
+       The integral serial number to set.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getSerial"></a>
+    <strong>getSerial&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the serial number of the message or zero (0) if none has been set.</p>
+
+<p> The message's serial number is provided by the application sending the
+ message and is used to identify replies to the message. All messages received
+ on a connection will have a serial provided by the remote application.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to get the serial number.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        The serial number of the message.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "addArgs"></a>
+    <strong>addArgs&nbsp;(msg, ...)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Append Lua arguments to a D-Bus message.</p>
+
+<p> The Lua arguments are converted to their equivalent D-Bus types
+ before encoding them into the message using a set of heuristics.
+ A Lua error is generated if any errors are detected during the
+ encoding process.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+         D-Bus message to append arguments to.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">args</span></span>
+       Lua arguments to append to the message.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "addArgsBySignature"></a>
+    <strong>addArgsBySignature&nbsp;(msg, signature, ...)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Append Lua arguments to a D-Bus message using signature.</p>
+
+<p> The Lua arguments are converted to their equivalent D-Bus types
+ using the provide D-Bus signature. The signature is used as guide
+ so that the conversions are explicit. If an error is encountered
+ in the conversion process a Lua error is thrown. The provided
+ signature <strong>must</strong> be a valid message signature.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+         D-Bus message to append arguments to.</li>
+      <li><span class="parameter">signature</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The valid D-Bus signature for the arguments.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">args</span></span>
+       Lua arguments to append to the message.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getArgs"></a>
+    <strong>getArgs&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Retrieve the arguments from the D-Bus message.</p>
+
+<p> This method unmarshalls the arguments from the D-Bus message
+ converting them to equivalent Lua types. The arguments are passed
+ back as multiple return values. If there is an error then a Lua
+ error is thrown.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+         D-Bus message to extract arguments.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">...</span></span>
+        Lua arguments passed out as multiple return values.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getArgsAsArray"></a>
+    <strong>getArgsAsArray&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Retrieve the arguments from the D-Bus message and return as an array.</p>
+
+<p> This method unmarshalls the arguments from the D-Bus message
+ converting them to equivalent Lua types. The arguments are returned
+ in a Lua table treated as an array. The arguments are ordered arg[1..N]
+ in the array. If there is an error then a Lua error is thrown.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+         D-Bus message to extract arguments.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">array</span></span>
+        Lua arguments returned in an array.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "marshallToArray"></a>
+    <strong>marshallToArray&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Marshall the D-Bus message data to a byte array.</p>
+
+<p> This method marshalls the contents of the D-Bus message into a Lua array
+ of numbers (bytes). The array represents a binary representation of the
+ D-Bus message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       D-Bus message to extract binary data.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">array</span></span>
+         Array of numbers containing the binary representation of
+ the message.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dispose"></a>
+    <strong>dispose&nbsp;(msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Unreferences the underlying (wrapped) D-Bus message.</p>
+
+<p> This function unreferences the D-Bus message that is wrapped by the Lua
+ userdata object. Unreferencing the message likely means that at the D-Bus
+ level the message is destroyed. The advantage of explicitly unreferencing
+ a message is that it deterministically destroys the underlying D-Bus message
+ rather than waiting for the Lua garbage collector to destroy it. Since the
+ Lua garbage collector may run infrequently there is always the chance that
+ numerous unreferenced Lua D-Bus messages may exist and consume valuable
+ system resources. This call can free the D-Bus message resource at the expense
+ that the (likely smaller) Lua D-Bus message userdata remains unclaimed until
+ the Lua garbage collector runs and unreferences the message userdata.</p>
+
+<p> <strong>Note:</strong> Once the <em>dispose</em> method is called on the Lua D-Bus message then
+ attempts to call additional methods will <strong>fail</strong> and generate a Lua error
+ to indicate the underlying D-Bus message no longer is referenced. In other
+ words, do <strong>not</strong> do this unless you want an error. Once a message is
+ disposed then the only <em>safe</em> action is for the Lua garbage collector to
+ reclaim it. This can be accelerated by not holding any strong references to
+ the Lua D-Bus message in question.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Lua D-Bus message to dispose.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

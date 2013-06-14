@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#ServiceObject">ServiceObject</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><strong>l2dbus.ServiceObject</strong></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.ServiceObject</code></h1>
+
+<p>L2DBUS ServiceObject</p>
+
+<p> This section describes a Lua ServiceObject class.</p>
+<p> A D-Bus service object is an instance of a D-Bus object that appears
+ on the bus with a specific object path. Typically a service object will
+ implement one or more <a href="../namespaces/l2dbus.Interface.html#">interfaces</a> which define the
+ methods, properties, and signals exposed by the service (e.g. its
+ application programming interface, or API). The handling of requests for a
+ service object from client applications can be delegated to the interfaces
+ themselves since they can handle request from more than one service object.
+ Interfaces can be <em>shared</em> by multiple service objects. Likewise service
+ object themselves can be <em>shared</em> across more than one
+ <a href="../namespaces/l2dbus.Connection.html#">connection</a>. In this way it's possible for a service
+ object to span multiple buses (e.g. have the same object appear on both a
+ <a href="../namespaces/l2dbus.Dbus.html#BUS_SYSTEM">system</a> and <a href="../namespaces/l2dbus.Dbus.html#BUS_SESSION">session</a> bus).</p>
+
+<p> If the interfaces themselves don't have handlers to process requests (or
+ they chose not to handle a specific request) then any registered <em>object</em>
+ handler gets the opportunity to process the request. If no suitable handler
+ is found then an appropriate error message is returned to the client
+ application.</p>
+
+<p> <strong>Note:</strong> Although possible, a more convenient method is available to
+ implement custom D-Bus services. The <a href="../modules/l2dbus.service.html#">l2dbus.service</a> module provides a
+ friendlier interface for instantiating D-Bus services and internally leverages
+ the ServiceObject. It is recommended that new services are implemented
+ using <a href="../modules/l2dbus.service.html#">l2dbus.service</a> methods instead.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(objPath, handler, userToken)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#ServiceObject">ServiceObject</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#path">path&nbsp;(object)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setData">setData&nbsp;(object, userToken)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#data">data&nbsp;(object)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addInterface">addInterface&nbsp;(object, interface)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeInterface">removeInterface&nbsp;(object, interface)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#introspect">introspect&nbsp;(object, conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(objPath, handler, userToken)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new ServiceObject.</p>
+
+<p> Creates a new service object used to implement a D-Bus object that can
+ respond to requests, emit signals, and expose properties. The service object
+ can be associated a handler that can process client requests. The signature of
+ the handler has the form:</p>
+
+<pre><code> DBusHandlerResult function onRequest(svcObj, conn, msg, userToken)
+</code></pre>
+
+<p> Where:</p>
+
+<p> <ul>
+ <li><em>svcObj</em>     - The D-Bus service object</li>
+ <li><em>conn</em>       - The D-Bus connection from which the request was received</li>
+ <li><em>msg</em>        - The D-Bus request message</li>
+ <li><em>userToken</em>  - A value specified by the user when the object was created.</li>
+ </ul></p>
+
+<p> The handler function should return one of the following values:</p>
+
+<p> <ul>
+ <li><a href="../namespaces/l2dbus.Dbus.html#HANDLER_RESULT_HANDLED">HANDLER_RESULT_HANDLED</a> - Request handled</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#HANDLER_RESULT_NOT_YET_HANDLED">HANDLER_RESULT_NOT_YET_HANDLED</a> - Request <strong>not</strong> handled</li>
+ <li><a href="../namespaces/l2dbus.Dbus.html#HANDLER_RESULT_NEED_MEMORY">HANDLER_RESULT_NEED_MEMORY</a> - Request <strong>not</strong> handled due to lack of memory</li>
+ </ul></p>
+
+<p> For all cases except <a href="../namespaces/l2dbus.Dbus.html#HANDLER_RESULT_HANDLED">HANDLER_RESULT_HANDLED</a>
+ the client application will receive an appropriate error message for an
+ unhandled request.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">objPath</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       A valid D-Bus object path.</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span> or <span class="type">nil</span></span>
+       An optional object handler function or <strong>nil</strong> if none desired.</li>
+      <li><span class="parameter">userToken</span>
+        <span class="types">optional <span class="type">any</span></span>
+       Optional client data associated with the handler. Will be passed
+ to the handler when its invoked.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        The userdata object representing the ServiceObject.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="ServiceObject"></a>ServiceObject</h2>
+    <dl class="function">
+    <dt>
+    <a name = "path"></a>
+    <strong>path&nbsp;(object)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the object path associated with the object.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         A string with the object path or <strong>nil</strong> if it
+ is unset.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setData"></a>
+    <strong>setData&nbsp;(object, userToken)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the user data to be passed back in the object request handler.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+      <li><span class="parameter">userToken</span>
+        <span class="types"><span class="type">any</span></span>
+       A value to pass back in the object request handler callback.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "data"></a>
+    <strong>data&nbsp;(object)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Retrieves the data that will be passed to the object request handler.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">any</span></span>
+         The value that will be returned in the object request handler
+ callback.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "addInterface"></a>
+    <strong>addInterface&nbsp;(object, interface)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Adds an <a href="../namespaces/l2dbus.Interface.html#">interface</a> to the service object.</p>
+
+<p> A service object can implement more than one interface but the interface
+ names must be unique (e.g. no two interfaces with the same name). This
+ method will fail if you try to add the same interface twice.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Interface.html#">interface</a> to add to
+ the object.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the interface was added successfully or
+ <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "removeInterface"></a>
+    <strong>removeInterface&nbsp;(object, interface)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Removes an <a href="../namespaces/l2dbus.Interface.html#">interface</a> from the service object.</p>
+
+<p> The same interface instance that was originally <a href="../namespaces/l2dbus.ServiceObject.html#addInterface">added</a> must be
+ used to remove it since the framework keeps a strong reference to that
+ interface until it is removed. If the same instance is not used (e.g.
+ different interface instance with the same name) then the Lua VM will never
+ be able to garbage collect the original interface.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+      <li><span class="parameter">interface</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Interface.html#">interface</a> to remove from
+ the object.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the interface was removed successfully or
+ <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "introspect"></a>
+    <strong>introspect&nbsp;(object, conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Introspects the object and returns the D-Bus XML introspection data.</p>
+
+<p> This method generates the D-Bus introspection XML data for a service object
+ and returns it as a string. Each interface associated with this object
+ will be introspected as well.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">object</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the ServiceObject.</li>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The userdata representing the Connection.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         Returns the D-Bus XML introspection data or <strong>nil</strong>
+ if it is unavailable.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><strong>l2dbus</strong></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>l2dbus</code></h1>
+
+<p>The low-level L2DBUS core module.</p>
+<p>
+
+
+<p>This module provides access to the low-level functions/methods
+that implement the binding to the D-Bus reference library. Loading this core
+library introduces the following namespaces into the <em>l2dbus</em> module.
+Since these are namespaces they are implicitly defined when the <em>l2dbus</em> is
+required.</p>
+
+<p>The following namespaces are created when the <em>l2dbus</em> module is loaded:
+</br></p>
+
+<ul>
+<li>l2dbus.Connection</li>
+<li>l2dbus.Dbus</li>
+<li>l2dbus.DbusTypes</li>
+<li>l2dbus.Dispatcher</li>
+<li>l2dbus.Int64</li>
+<li>l2dbus.Interface</li>
+<li>l2dbus.Introspection</li>
+<li>l2dbus.Match</li>
+<li>l2dbus.Message</li>
+<li>l2dbus.PendingCall</li>
+<li>l2dbus.ServiceObject</li>
+<li>l2dbus.Timeout</li>
+<li>l2dbus.Trace</li>
+<li>l2dbus.Uint64</li>
+<li>l2dbus.Watch</li>
+</ul>
+
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#shutdown">shutdown&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getVersion">getVersion&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#machineId">machineId&nbsp;()</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#versionInfo">versionInfo</a></td>
+	<td class="summary">Version table.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "shutdown"></a>
+    <strong>shutdown&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Shuts down the L2DBUS module.</p>
+
+<p> Typically this function should be called prior to
+ an L2DBUS application terminating. Once called it
+ is no longer safe to call any other L2DBUS
+ functions/methods. Strictly speaking, it's not
+ necessary to call this function when terminating since
+ the Lua VM and OS will implicitly free any underlying
+ resources.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getVersion"></a>
+    <strong>getVersion&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns version information about the L2DBUS module.</p>
+
+<p> This function returns a table containing useful version
+ information related to the module itself and underlying
+ libraries.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        <a href="../modules/l2dbus.html#versionInfo">versionInfo</a>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "machineId"></a>
+    <strong>machineId&nbsp;()</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the D-Bus local machine identifier.</p>
+
+<p> Obtains the machine UUID of the machine this process is
+ running on.</p>
+
+<p> For more details see:
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusMisc.html#ga2b21c9a12fea5f92763441c65ccbfcf9">
+ dbus&#95;get&#95;local&#95;machine_id(void)</a>
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The local D-Bus machine identifier.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Tables"></a>Tables</h2>
+    <dl class="function">
+    <dt>
+    <a name = "versionInfo"></a>
+    <strong>versionInfo</strong>
+    </dt>
+    <dd>
+    Version table. </p>
+
+<p> A table containing version information of the L2DBUS module
+ and underlying dependencies.
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">dbusMajor</span>
+       The D-Bus major version as a number.</li>
+      <li><span class="parameter">dbusMinor</span>
+       The D-Bus minor version as a number.</li>
+      <li><span class="parameter">dbusRelese</span>
+       The D-Bus release version as a number.</li>
+      <li><span class="parameter">l2dbusMajor</span>
+       The L2DBUS major version as a number.</li>
+      <li><span class="parameter">l2dbusMinor</span>
+       The L2DBUS minor version as a number.</li>
+      <li><span class="parameter">l2dbusRelese</span>
+       The L2DBUS release version as a number.</li>
+      <li><span class="parameter">l2dbusVerNum</span>
+       The L2DBUS version as a number.</li>
+      <li><span class="parameter">l2dbusVerStr</span>
+       The L2DBUS version as a string.</li>
+      <li><span class="parameter">cdbusMajor</span>
+       The CDBUS major version as a number.</li>
+      <li><span class="parameter">cdbusMinor</span>
+       The CDBUS minor version as a number.</li>
+      <li><span class="parameter">cdbusRelease</span>
+       The CDBUS release version as a number.</li>
+      <li><span class="parameter">cdbusVerStr</span>
+       The CDBUS version as a string.</li>
+      <li><span class="parameter">copyright</span>
+       The L2DBUS copyright information.</li>
+      <li><span class="parameter">author</span>
+       The L2DBUS author information.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

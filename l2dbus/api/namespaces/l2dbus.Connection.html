@@ -1,0 +1,1116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Connection">Connection</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><strong>l2dbus.Connection</strong></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Connection</code></h1>
+
+<p>L2DBUS Connection</p>
+<p> This namespace defines the functions/methods associated with the L2DBUS
+ Connection class.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#open">open&nbsp;(dispatcher, address, privateConn, exitOnDisconnect)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#openStandard">openStandard&nbsp;(dispatcher, busId, privateConn, exitOnDisconnect)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Connection">Connection</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#isConnected">isConnected&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isAuthenticated">isAuthenticated&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isAnonymous">isAnonymous&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getServerId">getServerId&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getBusId">getBusId&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getDescriptor">getDescriptor&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#canSendType">canSendType&nbsp;(conn, type)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#send">send&nbsp;(conn, msg)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sendWithReply">sendWithReply&nbsp;(conn, msg, timeout)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sendWithReplyAndBlock">sendWithReplyAndBlock&nbsp;(conn, msg, timeout)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#flush">flush&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hasMessagesToSend">hasMessagesToSend&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#registerMatch">registerMatch&nbsp;(conn, rule, handler, userToken)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unregisterMatch">unregisterMatch&nbsp;(conn, handle)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#registerServiceObject">registerServiceObject&nbsp;(conn, svcObj)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unregisterServiceObject">unregisterServiceObject&nbsp;(conn, svcObj)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMaxMessageSize">getMaxMessageSize&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setMaxMessageSize">setMaxMessageSize&nbsp;(conn, size)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMaxReceivedSize">getMaxReceivedSize&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setMaxReceivedSize">setMaxReceivedSize&nbsp;(conn, size)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getOutgoingSize">getOutgoingSize&nbsp;(conn)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "open"></a>
+    <strong>open&nbsp;(dispatcher, address, privateConn, exitOnDisconnect)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Opens a connection to a remote address.</p>
+
+<p> This function opens and returns a D-Bus connection. It can be used to open an
+ arbitrary address instead of one of the "standard" well-known ones. Optionally
+ the connection can be opened shared (e.g. if the connection already exists then
+ the existing connection is returned) or private. Likewise the connection
+ can be configured to cause the application to exit on disconnect. By default
+ the connection will be shared and will <strong>not</strong> exit on disconnect. It's recommended
+ that all connections should be opened shared to minimize resource usage.</p>
+
+<p> When the connection is no longer referenced the Lua garbage collector will either
+ close the connection (if opened privately) or unreference the connection (if opened as shared).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">dispatcher</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Dispatcher.html#">Dispatcher</a> to associate with the
+ connection.</li>
+      <li><span class="parameter">address</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       Remote D-Bus address to open</li>
+      <li><span class="parameter">privateConn</span>
+        <span class="types">optional <span class="type">bool</span></span>
+       Optional flag indicating whether this
+ is a private (<strong>true</strong>) or shared (<strong>false</strong>) connection. Defaults to a shared connection (<strong>false</strong>)</li>
+      <li><span class="parameter">exitOnDisconnect</span>
+        <span class="types">optional <span class="type">bool</span></span>
+       Optional flag indicating whether
+ the application should exit on disconnect (<strong>true</strong> or <strong>false</strong>). Defaults to <strong>false</strong>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Connection userdata object
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "openStandard"></a>
+    <strong>openStandard&nbsp;(dispatcher, busId, privateConn, exitOnDisconnect)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Opens a connection to one of the standard well-known buses.</p>
+
+<p> This function opens and returns a D-Bus connection to one of the standard well-known buses.
+ The well-known buses include the <a href="../namespaces/l2dbus.Dbus.html#BUS_SYSTEM">BUS_SYSTEM</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#BUS_SESSION">BUS_SESSION</a>, and <a href="../namespaces/l2dbus.Dbus.html#BUS_STARTER">BUS_STARTER</a> buses.
+ The connection can optionally be opened shared (e.g. if the connection already exists then
+ the existing connection is returned) or private. Likewise the connection
+ can be configured to cause the application to exit on disconnect. By default
+ the connection will be shared and will <strong>not</strong> exit on disconnect. It's recommended
+ that all connections should be opened shared to minimize resource usage.</p>
+
+<p> When the connection is no longer referenced the Lua garbage collector will either
+ close the connection (if opened privately) or unreference the connection (if opened as shared).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">dispatcher</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Dispatcher.html#">Dispatcher</a> to associate with the
+ connection.</li>
+      <li><span class="parameter">busId</span>
+        <span class="types"><span class="type">number</span></span>
+       The constant bus identifier: <a href="../namespaces/l2dbus.Dbus.html#BUS_SYSTEM">BUS_SYSTEM</a>,
+ <a href="../namespaces/l2dbus.Dbus.html#BUS_SESSION">BUS_SESSION</a>, or  <a href="../namespaces/l2dbus.Dbus.html#BUS_STARTER">BUS_STARTER</a></li>
+      <li><span class="parameter">privateConn</span>
+        <span class="types">optional <span class="type">bool</span></span>
+       Optional flag indicating whether this
+ is a private (<strong>true</strong>) or shared (<strong>false</strong>) connection. Defaults to a shared connection (<strong>false</strong>)</li>
+      <li><span class="parameter">exitOnDisconnect</span>
+        <span class="types">optional <span class="type">bool</span></span>
+       Optional flag indicating whether
+ the application should exit on disconnect (<strong>true</strong> or <strong>false</strong>). Defaults to <strong>false</strong>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        Connection userdata object
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Connection"></a>Connection</h2>
+    <dl class="function">
+    <dt>
+    <a name = "isConnected"></a>
+    <strong>isConnected&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Tests whether the connection is connected to the bus.</p>
+
+<p> This method can be called to detect whether or not
+ the provided connection is in fact connected to the
+ bus.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if connected, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isAuthenticated"></a>
+    <strong>isAuthenticated&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Tests whether the connection has been authenticated.</p>
+
+<p> This method can be called to detect whether or not
+ the provided connection has been authenticated.</p>
+
+<p> <strong>Note:</strong> If the connection was authenticated then disconnected then
+ this function still returns <strong>true</strong>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if authenticated, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isAnonymous"></a>
+    <strong>isAnonymous&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Tests whether the connection is not authenticated as a specific user.</p>
+
+<p> If the connection is not authenticated, this function returns <strong>true</strong>,
+ and if it is authenticated but as an anonymous user, it returns <strong>true</strong>.
+ If it is authenticated as a specific user, then this returns <strong>false</strong>.</p>
+
+<p> <strong>Note:</strong>  If the connection was authenticated as anonymous then
+ disconnected, this function still returns <strong>true</strong>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if not authenticated or authenticated as anonymous
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getServerId"></a>
+    <strong>getServerId&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the ID of the server address we are authenticated to on a client-side connection.</p>
+
+<p> If the connection is on the server side this will always return nil. For additional
+ details on this method see the original 'C' documentation
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusConnection.html#gae6c19e146a37f9de6a06c1617874bed9">here</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns the ID of the server if a client-side connection, <strong>nil</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getBusId"></a>
+    <strong>getBusId&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Asks the bus to return its the globally unique ID as described in the D-Bus specification.</p>
+
+<p> For additional details on this method see the original 'C' documentation
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusBus.html#ga18314500e7f6890a79bddbeace5df5f9">here</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        Returns bus ID or <strong>nil</strong> if there is an error.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getDescriptor"></a>
+    <strong>getDescriptor&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Retrieves the underlying file descriptor for the connection.</p>
+
+<p> If the underlying file descriptor is not available then <em>nil</em> will be
+ returned. <strong>DO NOT</strong> read or write to this file descriptor or try to
+ <em>select()</em> on it if already utilizing a D-Bus <a href="../namespaces/l2dbus.Watch.html#">Watch</a> for
+ main loop integration. Exceptions <em>may</em> exist if attempting to integrate
+ external main loops with the L2DBUS <a href="../namespaces/l2dbus.Dispatcher.html#">Dispatcher</a>. In this
+ scenario the <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> method should <strong>only</strong> be called
+ when the external loop detects write activity on this descriptor. The
+ <a href="../namespaces/l2dbus.Dispatcher.html#run">run</a> method should be called with the
+ <a href="../namespaces/l2dbus.Dispatcher.html#DISPATCH_NO_WAIT">l2dbus.Dispatcher.DISPATCH_NO_WAIT</a> option followed by a call to
+ <a href="../namespaces/l2dbus.Connection.html#flush">Connection:flush</a> to dispatch any queued messages.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+         Returns the file descriptor or <strong>nil</strong> if none is
+ available.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "canSendType"></a>
+    <strong>canSendType&nbsp;(conn, type)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Tests whether a certain type can be send via the connection.</p>
+
+<p> This function will always return <strong>true</strong> for all types with the exception of DBUS<em>TYPE</em>UNIX_FD.
+ For additional details on this method see the original 'C' documentation
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusConnection.html#ga3e41509b3afdbc22872bacc5754e85c2">here</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">type</span>
+        <span class="types"><span class="type">number</span> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The D-Bus type to check. The type definitions can be found
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusProtocol.html">here</a>. The
+ type can be expressed as a D-Bus integral type or as a single character string.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the D-Bus type can be sent or <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "send"></a>
+    <strong>send&nbsp;(conn, msg)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Adds a message to the outgoing message queue.</p>
+
+<p> This method does <strong>not</strong> block to write the message to the network;
+ that happens asynchronously. To force the message to be written an explicit
+ call to <a href="../namespaces/l2dbus.Connection.html#flush">flush</a> must be made otherwise the message will be sent the next
+ time the main loop is run.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to send</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the message is queued to be sent and
+ <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+         If the message is queued successfully then this will be
+ the transmitting serial number of the message otherwise this is zero (0).
+ </li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sendWithReply"></a>
+    <strong>sendWithReply&nbsp;(conn, msg, timeout)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Queues a message to send as with <a href="../namespaces/l2dbus.Connection.html#send">send</a> but returns a PendingCall to
+ receive the reply message later.</p>
+
+<p> If no reply is received in the given (optional) timeout the <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a>
+ expires and a synthetic error reply (generated locally, not by the remote
+ application) is generated indicating a timeout occurred.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to send</li>
+      <li><span class="parameter">timeout</span>
+        <span class="types">optional <span class="type">number</span></span>
+       An optional timeout in milliseconds to wait for a
+ reply. Two special values are allowed as well:
+ <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>
+ and <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>. The default
+ value (if none is specified) is <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the message is queued to be sent
+ and <strong>false</strong> otherwise.</li>
+        <li>
+          <span class="types"><span class="type">userdata</span> or <span class="type">nil</span></span>
+         If the message is queued successfully then a
+ <a href="../namespaces/l2dbus.PendingCall.html#">PendingCall</a> is returned or <strong>nil</strong> on failure.
+ </li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sendWithReplyAndBlock"></a>
+    <strong>sendWithReplyAndBlock&nbsp;(conn, msg, timeout)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sends a message and blocks for a certain period of time while waiting
+ for a reply.</p>
+
+<p> This function does <strong>not</strong> re-enter the main loop. This means messages
+ other than the reply (e.g. other requests, signals, etc...) are queued
+ but not processed. This function is used to invoke method calls on a
+ remote object. If a normal reply is received then the reply message is
+ returned. If an error is encountered or a D-Bus error message is received
+ then <strong>nil</strong> is returned as the first return parameter followed by an optional
+ error name and error message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus message to send</li>
+      <li><span class="parameter">timeout</span>
+        <span class="types">optional <span class="type">number</span></span>
+       An optional timeout in milliseconds to wait for a
+ reply. Two special values are allowed as well:
+ <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>
+ and <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_INFINITE">TIMEOUT_INFINITE</a>. The default
+ value (if none is specified) is <a href="../namespaces/l2dbus.Dbus.html#TIMEOUT_USE_DEFAULT">TIMEOUT_USE_DEFAULT</a>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">userdata</span> or <span class="type">nil</span></span>
+         The reply message or <strong>nil</strong> if there was an error. If
+ a D-Bus error message is received then <strong>nil</strong> is returned here and the
+ error name and message are returned in the next two parameters.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+        If there was an error <strong>or</strong> a D-Bus error message was
+ returned then a string indicating the error name <em>may</em> be returned or <strong>nil</strong></li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <span class="type">nil</span></span>
+         If there was an error <strong>or</strong> a D-Bus error message was
+ returned then a string containing an optional error message <em>may</em> be returned
+ or <strong>nil</strong> (if there is no message).
+ </li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "flush"></a>
+    <strong>flush&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Blocks until the outgoing message queue is empty.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasMessagesToSend"></a>
+    <strong>hasMessagesToSend&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Checks whether there are messages in the outgoing message queue.</p>
+
+<p> The <a href="../namespaces/l2dbus.Connection.html#flush">flush</a> method can be used to block until all outgoing messages
+ have been written to the underlying transport (such as a socket).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if there are pending messages in
+ the outgoing queue or <strong>false</strong> otherwise.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "registerMatch"></a>
+    <strong>registerMatch&nbsp;(conn, rule, handler, userToken)</strong>
+    </dt>
+    <dd>
+
+<p> </p>
+
+<p> Registers a handler for messages that match a defined set of rules.</p>
+
+<p> This method registers a function to receive messages that match a
+ specific <em>match</em> rule. A match rule as described
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-bus-routing-match-rules">here</a>
+ is part of the message bus routing protocol. These rules describe the
+ messages that should be delivered to a client based on the contents of
+ a message. The rule itself is describe by a Lua <a href="../namespaces/l2dbus.Match.html#MatchRule">table</a>
+ that contains specific fields that map to keywords in the D-Bus specification.</p>
+
+<p> The message handler should have the following prototype:</p>
+<pre><code> function onMatch(match, message, userToken)
+</code></pre>
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">rule</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+       The match rule table</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span></span>
+       The message handler for the rule</li>
+      <li><span class="parameter">userToken</span>
+        <span class="types">optional <span class="type">any</span></span>
+       Optional user defined data that is delivered to
+ the message handler</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">lightuserdata</span></span>
+         Returns a <em>match</em> rule handle. The handle can be used
+ to <a href="../namespaces/l2dbus.Connection.html#unregisterMatch">unregister</a> a match.
+
+    </ol>
+
+
+    <h3>see also:</h3>
+    <ul>
+         <a href="../namespaces/l2dbus.Match.html#MatchRule">l2dbus.Match.MatchRule</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "unregisterMatch"></a>
+    <strong>unregisterMatch&nbsp;(conn, handle)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Unregisters a message handler for the given match rule.</p>
+
+<p> This method unregisters the handler for the match rule referenced by the
+ handle returned by the call to <a href="../namespaces/l2dbus.Connection.html#registerMatch">register</a> a match.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">handle</span>
+        <span class="types"><span class="type">lightuserdata</span></span>
+       The match rule handle</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the match rule is unregistered successfully
+ and <strong>false</strong> if the handle is unknown or there is an error.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "registerServiceObject"></a>
+    <strong>registerServiceObject&nbsp;(conn, svcObj)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Registers a <a href="../namespaces/l2dbus.ServiceObject.html#">service object</a> with the connection.</p>
+
+<p> This method registers a service object with the connection that
+ will receive and handle requests from clients. A service object
+ can be registered with more than one connection if necessary. This means
+ a service object can span multiple buses (e.g. the same instance across a
+ <em>session</em> or <em>system</em> bus).
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">svcObj</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus service object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the service object is registered
+ successfully and <strong>false</strong> otherwise
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unregisterServiceObject"></a>
+    <strong>unregisterServiceObject&nbsp;(conn, svcObj)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Unregisters a <a href="../namespaces/l2dbus.ServiceObject.html#">service object</a> from the connection.</p>
+
+<p> This method unregisters a <a href="../namespaces/l2dbus.ServiceObject.html#">service object</a> from the
+ specified D-Bus connection.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">svcObj</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus service object to unregister</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the service object is unregistered
+ successfully and <strong>false</strong> otherwise
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMaxMessageSize"></a>
+    <strong>getMaxMessageSize&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the maximum size message this connection is allowed to receive.</p>
+
+<p> The maximum size of an individual message that this connection is allowed
+ to receive in bytes.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+         Returns the maximum size of an individual message that this
+ connection is allowed to received in bytes.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setMaxMessageSize"></a>
+    <strong>setMaxMessageSize&nbsp;(conn, size)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the maximum size message this connection is allowed to receive.</p>
+
+<p> Sets the maximum size (in bytes) of an individual message that this
+ connection is allowed to receive.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">size</span>
+        <span class="types"><span class="type">number</span></span>
+       The maximum message size in bytes</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMaxReceivedSize"></a>
+    <strong>getMaxReceivedSize&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the value set by <a href="../namespaces/l2dbus.Connection.html#setMaxReceivedSize">setMaxReceivedSize</a>.</p>
+
+<p> This is the maximum total number of bytes that can be used for all messages
+ received on this connection. Messages are counted toward the maximum until
+ they are finalized (e.g. collected by the Lua garbage collector). When the
+ maximum limit is reached the connection will <strong>not</strong> read more data until
+ some messages are finalized. For additional semantic information see the
+ description
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusConnection.html#ga6565d75f16e6e803372b2ae3d94d991b">here</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+         Returns the maximum total number of bytes that can be used
+ for all messages received on this connection.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setMaxReceivedSize"></a>
+    <strong>setMaxReceivedSize&nbsp;(conn, size)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the the maximum total number of bytes that can be used for all messages
+ received on this connection.</p>
+
+<p> This is the maximum total number of bytes that can be used for all messages
+ received on this connection. Messages are counted toward the maximum until
+ they are finalized (e.g. collected by the Lua garbage collector). When the
+ maximum limit is reached the connection will <strong>not</strong> read more data until
+ some messages are finalized. For additional semantic information see the
+ description
+ <a href="http://dbus.freedesktop.org/doc/api/html/group__DBusConnection.html#ga6565d75f16e6e803372b2ae3d94d991b">here</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+      <li><span class="parameter">size</span>
+        <span class="types"><span class="type">number</span></span>
+       The maximum total number of bytes that can be used for
+ all messages received on this connection.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getOutgoingSize"></a>
+    <strong>getOutgoingSize&nbsp;(conn)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Gets the <strong>approximate</strong> size in bytes of all messages in the outgoing message
+ queue.</p>
+
+<p> This is only an approximate value and shouldn't be considered a precise
+ amount.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">conn</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The D-Bus connection object</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+         Returns the approximate size (in bytes) of all the messages
+ in the outgoing queue.
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

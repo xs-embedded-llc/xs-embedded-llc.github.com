@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Constants">Constants</a></li>
+<li><a href="#Watch">Watch</a></li>
+</ul>
+
+
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><strong>l2dbus.Watch</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><a href="../modules/l2dbus.validate.html">l2dbus.validate</a></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Namespace <code>l2dbus.Watch</code></h1>
+
+<p>L2DBUS Watch</p>
+
+<p> This section describes a L2DBUS Watch class which represents a file
+ descriptor that can be monitored for activity.</p>
+<p> On Linux platforms this can include sockets, pipes, files, and anything that
+ provides a poll-able descriptor. Internally, L2DBUS monitors the
+ file-descriptor associated with a <a href="../namespaces/l2dbus.Connection.html#">Connection</a> to detect
+ when new messages are available to be received. Client applications can use
+ this same mechanism to monitor activity on various descriptors themselves.</p>
+
+
+<p> While a Watch is enabled a <em>strong</em> reference will be kept to it regardless
+ of whether is referenced by the client code. This means that it is <strong>not</strong>
+ eligible for garbage collection (GC) by the Lua VM. The strong reference
+ will be maintained until it is disabled again. This behavior facilitates the
+ creation of non-referenced watches that will continue to trigger as long
+ as they remain enabled.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new&nbsp;(dispatcher, fd, events, handler, userToken)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#EventTable">EventTable</a></td>
+	<td class="summary">The EventTable provides an indication of what events are signaled on
+ a given file-descriptor.</td>
+	</tr>
+</table>
+<h2><a href="#Constants">Constants</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#READ">READ</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#WRITE">WRITE</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ERROR">ERROR</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HANGUP">HANGUP</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+<h2><a href="#Watch">Watch</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#getDescriptor">getDescriptor&nbsp;(watch)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#events">events&nbsp;(watch)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setEvents">setEvents&nbsp;(watch, events)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isEnabled">isEnabled&nbsp;(watch)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setEnable">setEnable&nbsp;(watch, option)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#data">data&nbsp;(watch)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setData">setData&nbsp;(watch, userToken)</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new&nbsp;(dispatcher, fd, events, handler, userToken)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Creates a new Watch.</p>
+
+<p> Creates a new Watch with an associated handler that is called whenever one
+ of the specified events is signaled on the provided file descriptor. By
+ default a Watch is created <strong>disabled</strong> and needs to be explicitly enabled
+ in order to be armed.</p>
+
+<p> The Watch handler has a signature of the form:</p>
+
+<pre><code>function onWatch(watch, evTable, userToken)
+</code></pre>
+
+<p> Where:</p>
+
+<p> <ul>
+ <li><em>watch</em>        - The L2DBUS Watch instance</li>
+ <li><em>evTable</em>      - An table of signaled events. See <a href="../namespaces/l2dbus.Watch.html#EventTable">EventTable</a>.</li>
+ <li><em>userToken</em>    - A value specified by the client when the watch is created.</li>
+ </ul></p>
+
+<p> The handler does not have to return anything but should exit quickly to
+ minimize interruptions to the <a href="../namespaces/l2dbus.Dispatcher.html#">Dispatcher</a> main loop.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">dispatcher</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The <a href="../namespaces/l2dbus.Dispatcher.html#">dispatcher</a> with which
+ to associate the Watch.</li>
+      <li><span class="parameter">fd</span>
+        <span class="types"><span class="type">number</span> or <span class="type">userdata</span></span>
+       The file descriptor to watch. This can be either
+ a Lua file (e.g. userdata wrapping the actual file descriptor) or the
+ raw integral file descriptor received from the operating system that is
+ pollable.</li>
+      <li><span class="parameter">events</span>
+        <span class="types"><span class="type">number</span> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The events (<a href="../namespaces/l2dbus.Watch.html#READ">READ</a>, <a href="../namespaces/l2dbus.Watch.html#WRITE">WRITE</a>, <a href="../namespaces/l2dbus.Watch.html#ERROR">ERROR</a>,
+ <a href="../namespaces/l2dbus.Watch.html#HANGUP">HANGUP</a>) which should be monitored. If the parameter is a Lua number then
+ it is assumed to be a bitmask of the previous constants <strong>OR</strong>'ed together. If
+ it is a string then the letters <em>r</em> (<a href="../namespaces/l2dbus.Watch.html#READ">READ</a>), <em>w</em> (<a href="../namespaces/l2dbus.Watch.html#WRITE">WRITE</a>), <em>e</em> (<a href="../namespaces/l2dbus.Watch.html#ERROR">ERROR</a>),
+ and <em>h</em> (<a href="../namespaces/l2dbus.Watch.html#HANGUP">HANGUP</a>) are expected to indicate the events to watch.</li>
+      <li><span class="parameter">handler</span>
+        <span class="types"><span class="type">func</span></span>
+       The watch handler that's called when a timeout expires.</li>
+      <li><span class="parameter">userToken</span>
+        <span class="types">optional <span class="type">any</span></span>
+       User data that will be passed to the Watch
+ handler when it's called. Can be any Lua value.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">userdata</span></span>
+        The userdata object representing the Watch.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Tables"></a>Tables</h2>
+    <dl class="function">
+    <dt>
+    <a name = "EventTable"></a>
+    <strong>EventTable</strong>
+    </dt>
+    <dd>
+    The EventTable provides an indication of what events are signaled on
+ a given file-descriptor.  The <em>evMask</em> field is a bitwise <strong>OR</strong> of a
+ combination of the following constants: <a href="../namespaces/l2dbus.Watch.html#READ">READ</a>, <a href="../namespaces/l2dbus.Watch.html#WRITE">WRITE</a>, <a href="../namespaces/l2dbus.Watch.html#ERROR">ERROR</a>, and
+ <a href="../namespaces/l2dbus.Watch.html#HANGUP">HANGUP</a>. There are also discrete fields in the table for each event type
+ and these will be set to <strong>true</strong> or <strong>false</strong> depending on whether they are
+ signaled.
+
+    <h3>Fields:</h3>
+    <ul>
+      <li><span class="parameter">evMask</span>
+       (number) The actual event mask of signaled events.</li>
+      <li><span class="parameter">READ</span>
+       (bool) Set to <strong>true</strong> if the <em>read</em> event is signaled.</li>
+      <li><span class="parameter">WRITE</span>
+       (bool) Set to <strong>true</strong> if the <em>write</em> event is signaled.</li>
+      <li><span class="parameter">ERROR</span>
+       (bool) Set to <strong>true</strong> if the <em>error</em> event is signaled.</li>
+      <li><span class="parameter">HANGUP</span>
+       (bool) Set to <strong>true</strong> if the <em>hangup</em> event is signaled.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Constants"></a>Constants</h2>
+    <dl class="function">
+    <dt>
+    <a name = "READ"></a>
+    <strong>READ</strong>
+    </dt>
+    <dd>
+
+ The bitmask for file-descriptor <em>read</em> event.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "WRITE"></a>
+    <strong>WRITE</strong>
+    </dt>
+    <dd>
+
+ The bitmask for file-descriptor <em>write</em> event.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ERROR"></a>
+    <strong>ERROR</strong>
+    </dt>
+    <dd>
+
+ The bitmask for file-descriptor <em>error</em> event.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HANGUP"></a>
+    <strong>HANGUP</strong>
+    </dt>
+    <dd>
+
+ The bitmask for file-descriptor <em>hangup</em> event.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Watch"></a>Watch</h2>
+    <dl class="function">
+    <dt>
+    <a name = "getDescriptor"></a>
+    <strong>getDescriptor&nbsp;(watch)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the underlying file descriptor being watched.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch monitoring the file descriptor.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">number</span></span>
+        Returns the underlying OS file descriptor being monitored.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "events"></a>
+    <strong>events&nbsp;(watch)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the events being monitored on the file descriptor.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch for which the events are returned.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Returns an <a href="../namespaces/l2dbus.Watch.html#EventTable">EventTable</a> indicating the events that
+ are being monitored.
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setEvents"></a>
+    <strong>setEvents&nbsp;(watch, events)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the events that the Watch should monitor.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch to set the events to monitor.</li>
+      <li><span class="parameter">events</span>
+        <span class="types"><span class="type">number</span> or <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The events (<a href="../namespaces/l2dbus.Watch.html#READ">READ</a>, <a href="../namespaces/l2dbus.Watch.html#WRITE">WRITE</a>, <a href="../namespaces/l2dbus.Watch.html#ERROR">ERROR</a>,
+ <a href="../namespaces/l2dbus.Watch.html#HANGUP">HANGUP</a>) which should be monitored. If the parameter is a Lua number then
+ it is assumed to be a bitmask of the previous constants <strong>OR</strong>'ed together. If
+ it is a string then the letters <em>r</em> (<a href="../namespaces/l2dbus.Watch.html#READ">READ</a>), <em>w</em> (<a href="../namespaces/l2dbus.Watch.html#WRITE">WRITE</a>), <em>e</em> (<a href="../namespaces/l2dbus.Watch.html#ERROR">ERROR</a>),
+ and <em>h</em> (<a href="../namespaces/l2dbus.Watch.html#HANGUP">HANGUP</a>) are expected to indicate the events to watch.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isEnabled"></a>
+    <strong>isEnabled&nbsp;(watch)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns whether the specified watch is enabled to monitor events.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch to see if it's enabled.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if it's enabled, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setEnable"></a>
+    <strong>setEnable&nbsp;(watch, option)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets whether the watch should be enabled or disabled from monitoring the
+ associated file descriptor.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch to configure.</li>
+      <li><span class="parameter">option</span>
+        <span class="types"><span class="type">bool</span></span>
+       Set to <strong>true</strong> to enable the watch, <strong>false</strong> to
+ disable it.
+ </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "data"></a>
+    <strong>data&nbsp;(watch)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Returns the user specified data associated with the watch.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch to get the user data.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">any</span></span>
+        Returns the user data associated with the watch.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setData"></a>
+    <strong>setData&nbsp;(watch, userToken)</strong>
+    </dt>
+    <dd>
+     </p>
+
+<p> Sets the user specific data passed to the watch handler.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">watch</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The watch to set the user data.</li>
+      <li><span class="parameter">userToken</span>
+        <span class="types"><span class="type">any</span></span>
+       The user specific data to associate with the watch.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

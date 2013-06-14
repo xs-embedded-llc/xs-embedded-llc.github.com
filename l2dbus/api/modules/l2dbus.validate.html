@@ -1,0 +1,505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-To-D-Bus (L2DBUS) Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>L2DBUS</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/l2dbus.html">l2dbus</a></li>
+  <li><a href="../modules/l2dbus-ev.html">l2dbus-ev</a></li>
+  <li><a href="../modules/l2dbus-glib.html">l2dbus-glib</a></li>
+  <li><a href="../modules/l2dbus.msgbusctrl.html">l2dbus.msgbusctrl</a></li>
+  <li><a href="../modules/l2dbus.proxyctrl.html">l2dbus.proxyctrl</a></li>
+  <li><a href="../modules/l2dbus.service.html">l2dbus.service</a></li>
+  <li><strong>l2dbus.validate</strong></li>
+  <li><a href="../modules/l2dbus.xml.html">l2dbus.xml</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+</ul>
+<h2>Namespaces</h2>
+<ul>
+  <li><a href="../namespaces/l2dbus.Connection.html">l2dbus.Connection</a></li>
+  <li><a href="../namespaces/l2dbus.Dbus.html">l2dbus.Dbus</a></li>
+  <li><a href="../namespaces/l2dbus.DbusTypes.html">l2dbus.DbusTypes</a></li>
+  <li><a href="../namespaces/l2dbus.Dispatcher.html">l2dbus.Dispatcher</a></li>
+  <li><a href="../namespaces/l2dbus.Int64.html">l2dbus.Int64</a></li>
+  <li><a href="../namespaces/l2dbus.Interface.html">l2dbus.Interface</a></li>
+  <li><a href="../namespaces/l2dbus.Introspection.html">l2dbus.Introspection</a></li>
+  <li><a href="../namespaces/l2dbus.Match.html">l2dbus.Match</a></li>
+  <li><a href="../namespaces/l2dbus.Message.html">l2dbus.Message</a></li>
+  <li><a href="../namespaces/l2dbus.PendingCall.html">l2dbus.PendingCall</a></li>
+  <li><a href="../namespaces/l2dbus.ServiceObject.html">l2dbus.ServiceObject</a></li>
+  <li><a href="../namespaces/l2dbus.Timeout.html">l2dbus.Timeout</a></li>
+  <li><a href="../namespaces/l2dbus.Trace.html">l2dbus.Trace</a></li>
+  <li><a href="../namespaces/l2dbus.Uint64.html">l2dbus.Uint64</a></li>
+  <li><a href="../namespaces/l2dbus.Watch.html">l2dbus.Watch</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>l2dbus.validate</code></h1>
+
+<p>Validation Module.</p>
+<p> This module contains several useful functions for validating arguments to
+ ensure they're the correct types or formatted according to the D-Bus
+ specification.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#checkTypes">checkTypes&nbsp;(pattern, ...)</a></td>
+	<td class="summary">Checks the argument types according to the specified pattern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidUtf8">isValidUtf8&nbsp;(str)</a></td>
+	<td class="summary">A simple UTF-8 validator in Lua.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidBusName">isValidBusName&nbsp;(name)</a></td>
+	<td class="summary">Verifies the given name is a valid D-Bus bus name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidObjectPath">isValidObjectPath&nbsp;(name)</a></td>
+	<td class="summary">Verifies the given name is a valid D-Bus object path.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidMember">isValidMember&nbsp;(name)</a></td>
+	<td class="summary">Verifies the given name is a valid D-Bus member name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidInterface">isValidInterface&nbsp;(name)</a></td>
+	<td class="summary">Verifies the given name is a valid D-Bus interface name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isValidErrorName">isValidErrorName&nbsp;(name)</a></td>
+	<td class="summary">Verifies the given name is a valid D-Bus error name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#verify">verify&nbsp;(v, msg)</a></td>
+	<td class="summary">Verifies <em>v</em> is true and if not throw a Lua error with <em>msg</em> as the string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#verifyTypes">verifyTypes&nbsp;(pattern, ...)</a></td>
+	<td class="summary">Verify the arguments match the acceptable pattern of types.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#verifyTypesWithMsg">verifyTypesWithMsg&nbsp;(pattern, msg, ...)</a></td>
+	<td class="summary">Check argument types and emit Lua error with message if invalid.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#doValidation">doValidation</a></td>
+	<td class="summary">Set to <strong>true</strong> to enable validation, <strong>false</strong> to skip the calls to
+ do validation or check argument types.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "checkTypes"></a>
+    <strong>checkTypes&nbsp;(pattern, ...)</strong>
+    </dt>
+    <dd>
+    Checks the argument types according to the specified pattern.
+  A pattern has the form of:</p>
+<pre><code>type1|type2|...
+</code></pre>
+<p>  Where type<em>N</em> is a Lua type or the '*' wildcard character which matches
+  any type. The '|' character functions as a type name delimiter and
+  separates alternate types that can match (e.g. like a logical <em>OR</em>).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">pattern</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The acceptable "types" pattern to match.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">any</span></span>
+       The arguments to check against the pattern.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+         Returns <strong>true</strong> if the arguments match the pattern or
+  <strong>false</strong> if there is no match (e.g. the argument is not one of the
+  specified types).</li>
+        <li>
+          <span class="types"><span class="type">nil</span> or <span class="type">number</span></span>
+         If all the arguments match the acceptable types then
+  return <em>nil</em> otherwise return the argument index of the first argument that
+  doesn't match the type pattern.</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidUtf8"></a>
+    <strong>isValidUtf8&nbsp;(str)</strong>
+    </dt>
+    <dd>
+    A simple UTF-8 validator in Lua.
+ Tested only with texlua. </br>
+ Manuel Pégourié-Gonnard, 2009, WTFPL v2.</br>
+ See <a href="http://www.wtfpl.net/about/">license</a> for details on WTFPL v2.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">str</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The string to check to see if it's valid UTF-8 text.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns true if <em>str</em> is a valid utf-8 sequence according
+ to RFC 3629.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidBusName"></a>
+    <strong>isValidBusName&nbsp;(name)</strong>
+    </dt>
+    <dd>
+    Verifies the given name is a valid D-Bus bus name. </p>
+
+<p> Checks to see whether the provided name meets the
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">requirements</a>
+ for a valid D-Bus bus name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       D-Bus bus name to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if bus name is valid, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidObjectPath"></a>
+    <strong>isValidObjectPath&nbsp;(name)</strong>
+    </dt>
+    <dd>
+    Verifies the given name is a valid D-Bus object path. </p>
+
+<p> Checks to see whether the provided path name meets the
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">requirements</a>
+ for a valid D-Bus object path.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       D-Bus object path to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if object path is valid, <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidMember"></a>
+    <strong>isValidMember&nbsp;(name)</strong>
+    </dt>
+    <dd>
+    Verifies the given name is a valid D-Bus member name. </p>
+
+<p> Checks to see whether the provided name meets the
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">requirements</a>
+ for a valid D-Bus member name. Member names are D-Bus member or signal
+ names.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       D-Bus member name to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the member name is valid,
+ <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidInterface"></a>
+    <strong>isValidInterface&nbsp;(name)</strong>
+    </dt>
+    <dd>
+    Verifies the given name is a valid D-Bus interface name. </p>
+
+<p> Checks to see whether the provided name meets the
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">requirements</a>
+ for a valid D-Bus interface name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       D-Bus interface name to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the interface name is valid,
+ <strong>false</strong> otherwise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isValidErrorName"></a>
+    <strong>isValidErrorName&nbsp;(name)</strong>
+    </dt>
+    <dd>
+    Verifies the given name is a valid D-Bus error name.
+ Checks to see whether the provided name meets the
+ <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names">requirements</a>
+ for a valid D-Bus error name. This requirements are identical to the
+ requirements for a D-Bus interface name.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">name</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       D-Bus error name to validate.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">bool</span></span>
+        Returns <strong>true</strong> if the error name is valid,
+ <strong>false</strong> otherwise.
+    </ol>
+
+
+    <h3>see also:</h3>
+    <ul>
+         <a href="../modules/l2dbus.validate.html#isValidInterface">isValidInterface</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "verify"></a>
+    <strong>verify&nbsp;(v, msg)</strong>
+    </dt>
+    <dd>
+    Verifies <em>v</em> is true and if not throw a Lua error with <em>msg</em> as the string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">v</span>
+        <span class="types"><span class="type">bool</span></span>
+       Value to verify whether it evaluates to <strong>true</strong> or <em>*false</em>.</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The message to emit in the Lua error if <em>v</em> evaluates to
+ <strong>false</strong>.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">nil</span></span>
+        Returns <strong>nil</strong> if <strong>v</strong> evaluates to <strong>true</strong>, otherwise a
+ Lua error is thrown with <strong>msg</strong> as the error text.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "verifyTypes"></a>
+    <strong>verifyTypes&nbsp;(pattern, ...)</strong>
+    </dt>
+    <dd>
+    Verify the arguments match the acceptable pattern of types.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">pattern</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+<p> Types pattern of the form:</p>
+<pre><code>    type1|type2|typeN|...
+</code></pre>
+</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">any</span></span>
+       Argument list to test against the pattern.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">nil</span></span>
+        Returns <strong>nil</strong> if all the arguments match the types pattern.
+ A Lua error is thrown if an unexpected type is found.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "verifyTypesWithMsg"></a>
+    <strong>verifyTypesWithMsg&nbsp;(pattern, msg, ...)</strong>
+    </dt>
+    <dd>
+    Check argument types and emit Lua error with message if invalid. </p>
+
+<p> Similar to <a href="../modules/l2dbus.validate.html#verifyTypes">verifyTypes</a> except the Lua error that is emitted if
+ the types aren't valid with include the specified message.
+
+    <h3>Parameters:</h3>
+    <ul>
+      <li><span class="parameter">pattern</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+<p> Types pattern of the form:</p>
+<pre><code>    type1|type2|typeN|...
+</code></pre>
+</li>
+      <li><span class="parameter">msg</span>
+        <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+       The message to include with any Lua error emitted.</li>
+      <li><span class="parameter">...</span>
+        <span class="types"><span class="type">any</span></span>
+       Argument list to test against the pattern.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><span class="type">nil</span></span>
+        Returns <strong>nil</strong> if all the arguments match the types pattern.
+ A Lua error is thrown if an unexpected type is found.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Fields"></a>Fields</h2>
+    <dl class="function">
+    <dt>
+    <a name = "doValidation"></a>
+    <strong>doValidation</strong>
+    </dt>
+    <dd>
+    Set to <strong>true</strong> to enable validation, <strong>false</strong> to skip the calls to
+ do validation or check argument types.
+ This provides a convenient global property that can turn real validation
+ on or off based on possible performance needs or debugging options. By
+ default validation is <strong>enabled</strong> (true).
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
