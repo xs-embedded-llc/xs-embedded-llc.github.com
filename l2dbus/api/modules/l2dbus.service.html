@@ -108,7 +108,7 @@
 <h2><a href="#Service">Service</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#attach">attach&nbsp;(conn)</a></td>
+	<td class="name" nowrap><a href="#attach">attach&nbsp;(svc, conn)</a></td>
 	<td class="summary">Attaches a D-Bus service with associated object path to the connection.</td>
 	</tr>
 	<tr>
@@ -330,7 +330,7 @@
     <dl class="function">
     <dt>
     <a name = "attach"></a>
-    <strong>attach&nbsp;(conn)</strong>
+    <strong>attach&nbsp;(svc, conn)</strong>
     </dt>
     <dd>
     Attaches a D-Bus service with associated object path to the connection. </p>
@@ -342,6 +342,9 @@
 
     <h3>Parameters:</h3>
     <ul>
+      <li><span class="parameter">svc</span>
+        <span class="types"><span class="type">userdata</span></span>
+       The Service instance.</li>
       <li><span class="parameter">conn</span>
         <span class="types"><span class="type">userdata</span></span>
        The D-Bus connection.</li>
