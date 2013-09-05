@@ -201,13 +201,13 @@
  With the interface there can be associated a handler that can process
  client requests. The signature of the handler has the form:</p>
 
-<pre><code> DBusHandlerResult function onRequest(svcObj, conn, msg, userToken)
+<pre><code> DBusHandlerResult function onRequest(interface, conn, msg, userToken)
 </code></pre>
 
 <p> Where:</p>
 
 <p> <ul>
- <li><em>svcObj</em>     - The D-Bus service object implementing this interface</li>
+ <li><em>interface</em>  - The D-Bus interface associated with the handler</li>
  <li><em>conn</em>       - The D-Bus connection from which the request was received</li>
  <li><em>msg</em>        - The D-Bus request message</li>
  <li><em>userToken</em>  - A value specified by the user when the interface was created.</li>
